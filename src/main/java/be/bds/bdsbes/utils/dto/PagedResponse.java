@@ -1,8 +1,5 @@
 package be.bds.bdsbes.utils.dto;
 
-import be.bds.bdsbes.entities.Phong;
-import be.bds.bdsbes.payload.PhongResponse1;
-
 import java.util.List;
 
 public class PagedResponse<T> {

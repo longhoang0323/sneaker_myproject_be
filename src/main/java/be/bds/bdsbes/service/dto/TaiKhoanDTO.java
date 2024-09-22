@@ -2,16 +2,12 @@ package be.bds.bdsbes.service.dto;
 
 import be.bds.bdsbes.entities.KhachHang;
 import be.bds.bdsbes.entities.TaiKhoan;
-import be.bds.bdsbes.entities.TheThanhVien;
 import lombok.Getter;
 import lombok.Setter;
 import org.hibernate.validator.constraints.Length;
 
 import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
-import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.util.Random;
 
 @Getter

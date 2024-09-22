@@ -2,7 +2,6 @@ package be.bds.bdsbes.service.impl;
 
 import be.bds.bdsbes.domain.User;
 import be.bds.bdsbes.entities.KhachHang;
-import be.bds.bdsbes.entities.TheThanhVien;
 import be.bds.bdsbes.exception.ServiceException;
 import be.bds.bdsbes.payload.SignUpRequest;
 import be.bds.bdsbes.repository.RoleRepository;

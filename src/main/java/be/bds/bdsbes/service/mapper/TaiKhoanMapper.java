@@ -1,8 +1,6 @@
 package be.bds.bdsbes.service.mapper;
 
-import be.bds.bdsbes.entities.ChiTietPhong;
 import be.bds.bdsbes.entities.TaiKhoan;
-import be.bds.bdsbes.payload.ChiTietPhongResponse1;
 import be.bds.bdsbes.payload.TaiKhoanResponse1;
 import org.mapstruct.*;
 

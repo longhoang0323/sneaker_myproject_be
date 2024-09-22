@@ -1,6 +1,5 @@
 package be.bds.bdsbes.payload;
 
-import be.bds.bdsbes.entities.TheThanhVien;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;

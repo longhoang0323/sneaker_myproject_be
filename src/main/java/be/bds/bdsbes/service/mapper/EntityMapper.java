@@ -1,7 +1,5 @@
 package be.bds.bdsbes.service.mapper;
 
-import be.bds.bdsbes.payload.ChiTietPhongResponse1;
-
 import java.util.List;
 
 public interface EntityMapper <D, E> {

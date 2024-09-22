@@ -1,8 +1,6 @@
 package be.bds.bdsbes.service.dto;
 
 import be.bds.bdsbes.entities.KhachHang;
-import be.bds.bdsbes.entities.TaiKhoan;
-import be.bds.bdsbes.entities.TheThanhVien;
 import lombok.Getter;
 import lombok.Setter;
 

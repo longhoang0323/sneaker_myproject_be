@@ -3,7 +3,6 @@ package be.bds.bdsbes.service.impl;
 import be.bds.bdsbes.domain.User;
 import be.bds.bdsbes.entities.ThongBao;
 import be.bds.bdsbes.exception.ServiceException;
-import be.bds.bdsbes.repository.ThongBaoRepository;
 import be.bds.bdsbes.service.iService.IThongBaoService;
 import be.bds.bdsbes.service.dto.ThongBaoDTO;
 import be.bds.bdsbes.service.dto.response.ThongBaoResponse;

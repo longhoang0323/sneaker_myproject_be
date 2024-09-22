@@ -2,13 +2,11 @@ package be.bds.bdsbes.service.impl;
 
 import be.bds.bdsbes.domain.User;
 import be.bds.bdsbes.entities.KhachHang;
-import be.bds.bdsbes.entities.TheThanhVien;
 import be.bds.bdsbes.exception.ServiceException;
 import be.bds.bdsbes.payload.KhachHangResponse1;
 import be.bds.bdsbes.repository.KhachHangRepository;
 import be.bds.bdsbes.repository.UserRepository;
 import be.bds.bdsbes.service.dto.KhachHangDTO;
-import be.bds.bdsbes.service.dto.TheThanhVienDTO;
 import be.bds.bdsbes.service.iService.IKhachHangService;
 import be.bds.bdsbes.service.mapper.KhachHangMapper;
 import be.bds.bdsbes.utils.AppConstantsUtil;
@@ -50,7 +48,6 @@ public class KhachHangServiceImpl implements IKhachHangService {
     @Autowired
     private EmailService emailService;
 
-    TheThanhVienDTO theThanhVienDTO;
 
     @Override
     public List<KhachHang> getList() {

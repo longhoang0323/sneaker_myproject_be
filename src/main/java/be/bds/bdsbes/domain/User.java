@@ -1,6 +1,5 @@
 package be.bds.bdsbes.domain;
 
-import be.bds.bdsbes.entities.DatPhong;
 import be.bds.bdsbes.entities.KhachHang;
 import be.bds.bdsbes.entities.ThongBao;
 import be.bds.bdsbes.utils.ValidationErrorUtil;
