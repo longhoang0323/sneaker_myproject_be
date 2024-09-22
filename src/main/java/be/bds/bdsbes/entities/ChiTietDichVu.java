@@ -1,0 +1,58 @@
+package be.bds.bdsbes.entities;
+
+import lombok.*;
+import org.hibernate.annotations.Nationalized;
+
+import javax.persistence.*;
+import java.math.BigDecimal;
+import java.time.LocalDateTime;
+
+@Builder
+@AllArgsConstructor
+@NoArgsConstructor
+@Getter
+@Setter
+@ToString
+@Entity
+@Table(name = ChiTietDichVu.TABLE_NAME)
+public class ChiTietDichVu {
+    public static final String TABLE_NAME = "chi_tiet_dich_vu";
+    public static final String COLUMN_ID_NAME = "id";
+    public static final String COLUMN_GHICHU_NAME = "ghi_chu";
+    public static final String COLUMN_GIADICHVU_NAME = "gia_dich_vu";
+    public static final String COLUMN_TRANGTHAI_NAME = "trang_thai";
+    public static final String COLUMN_SOLUONG_NAME = "so_luong";
+    public static final String COLUMN_THOIGIANDAT_NAME = "thoi_gian_dat";
+
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = COLUMN_ID_NAME, nullable = false)
+    private Long id;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "id_dich_Vu")
+    private DichVu dichVu;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "id_dat_phong")
+    private DatPhong datPhong;
+
+    @Nationalized
+    @Lob
+    @Column(name = COLUMN_GHICHU_NAME)
+    private String ghiChu;
+
+    @Column(name = COLUMN_GIADICHVU_NAME, precision = 18)
+    private BigDecimal giaDichVu;
+
+    @Column(name = COLUMN_TRANGTHAI_NAME)
+    private Integer trangThai;
+
+    @Column(name = COLUMN_SOLUONG_NAME)
+    private int soLuong;
+
+    @Column(name = COLUMN_THOIGIANDAT_NAME)
+    private LocalDateTime thoiGianDat;
+
+}
