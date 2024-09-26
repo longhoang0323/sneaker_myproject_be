@@ -1,5 +1,6 @@
 package be.bds.bdsbes.entities;
 
+import be.bds.bdsbes.domain.User;
 import lombok.*;
 import org.hibernate.annotations.Nationalized;
 
@@ -32,6 +33,14 @@ public class HoaDon {
     @Column(name = COLUMN_ID_NAME, nullable = false)
     private Long id;
 
+    @ManyToOne(cascade = CascadeType.MERGE)
+    @JoinColumn(name = "id_khach_hang")
+    private KhachHang khachHang;
+
+    @ManyToOne(cascade = CascadeType.MERGE)
+    @JoinColumn(name = "id_user")
+    private User user;
+
     @Column(name = "ma")
     private String ma;
 
@@ -41,8 +50,38 @@ public class HoaDon {
     @Column(name = COLUMN_NGAYTHANHTOAN_NAME)
     private LocalDateTime ngayThanhToan;
 
+    @Column(name = "hinh_thuc_giao_hang")
+    private int hinhThucGiaoHang;
+
+    @Column(name = "hinh_thuc_thanh_toan")
+    private int hinhThucThanhToan;
+
+    @Column(name = "ten_nguoi_nhan")
+    private String tenNguoiNhan;
+
+    @Column(name = "sdt_nguoi_nhan")
+    private String sdtNguoiNhan;
+
+    @Column(name = "ten_nguoi_ship")
+    private String tenNguoiShip;
+
+    @Column(name = "sdt_nguoi_ship")
+    private String sdtNguoiShip;
+
+    @Column(name = "dia_chi")
+    private String diaChi;
+
     @Column(name = COLUMN_TONGTIEN_NAME, precision = 18)
     private BigDecimal tongTien;
+
+    @Column(name = "tien_ship", precision = 18)
+    private BigDecimal tienShip;
+
+    @Column(name = "tien_giam_gia", precision = 18)
+    private BigDecimal tienGiamGia;
+
+    @Column(name = "tong_thanh_toan", precision = 18)
+    private BigDecimal tongThanhToan;
 
     @Column(name = COLUMN_TRANGTHAI_NAME)
     private Integer trangThai;
@@ -51,37 +90,6 @@ public class HoaDon {
     @Lob
     @Column(name = COLUMN_GHICHU_NAME)
     private String ghiChu;
-
-    @ManyToOne(cascade = CascadeType.MERGE)
-    @JoinColumn(name = "id_khach_hang")
-    private KhachHang khachHang;
-
-    @Column(name = "tien_coc", precision = 18)
-    private BigDecimal tienCoc;
-
-    @Column(name = "thoi_gian_coc")
-    private LocalDateTime thoiGianCoc;
-
-    @Column(name = "tien_phong", precision = 18)
-    private BigDecimal tienPhong;
-
-    @Column(name = "tien_dich_vu", precision = 18)
-    private BigDecimal tienDichVu;
-
-    @Column(name = "tien_phat", precision = 18)
-    private BigDecimal tienPhat;
-
-    @Column(name = "tien_tich_diem", precision = 18)
-    private BigDecimal tienTichDiem;
-
-    @Column(name = "tien_thanh_toan", precision = 18)
-    private BigDecimal tienThanhToan;
-
-    @Column(name = "tien_hoan_lai", precision = 18)
-    private BigDecimal tienHoanLai;
-
-    @OneToMany(mappedBy = "hoaDon")
-    private Set<DatPhong> datPhongs = new LinkedHashSet<>();
 
     @OneToMany(mappedBy = "hoaDon")
     private Set<HoaDonChiTiet> hoaDonChiTiets = new LinkedHashSet<>();

@@ -14,7 +14,7 @@ import be.bds.bdsbes.service.iService.IUserService;
 
 @Slf4j
 @RestController
-@RequestMapping("/rpc/bds/user")
+@RequestMapping("/myproject/sneaker/user")
 public class UserController {
 
     @Autowired

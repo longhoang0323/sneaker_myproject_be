@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.*;
 
 // Controller để xử lý các yêu cầu từ Angular
 @RestController
-@RequestMapping("/rpc/bds/api")
+@RequestMapping("/myproject/sneaker/api")
 public class VisitorController {
     @Autowired
     private VisitorService visitorService;

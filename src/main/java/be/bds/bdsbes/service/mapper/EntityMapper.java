@@ -8,6 +8,4 @@ public interface EntityMapper <D, E> {
 
     List<E> toEntities(List<D> dtoList);
     List <D> toDtoList(List<E> entityList);
-
-    List<D> toResponseList(List<ChiTietPhongResponse1> entityList);
 }

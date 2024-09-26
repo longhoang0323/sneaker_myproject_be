@@ -7,7 +7,7 @@ import org.mapstruct.*;
 
 @Mapper(unmappedTargetPolicy = ReportingPolicy.IGNORE, componentModel = "spring")
 public interface FeedbackMapper extends EntityMapper<FeedbackResponse, FeedBack>{
-    @Mapping(target = "tenKhachHang", source = "khachHang.hoTen")
+
     @BeanMapping(nullValuePropertyMappingStrategy = NullValuePropertyMappingStrategy.IGNORE)
     FeedbackResponse toDto(FeedBack feedBack);
 }

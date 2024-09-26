@@ -73,10 +73,6 @@ public class User extends DateAudit {
             inverseJoinColumns = @JoinColumn(name = "role_id"))
     private Set<Role> roles = new HashSet<>();
 
-
-    @OneToMany(mappedBy = "khachHang")
-    private Set<DatPhong> datPhongs = new LinkedHashSet<>();
-
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
     private Set<ThongBao> thongBaos = new LinkedHashSet<>();
 

@@ -16,7 +16,6 @@ import java.time.LocalDateTime;
 @Setter
 public class ThongBaoDTO implements Serializable {
     Long userId;
-    String maDatPhong;
     String noiDung;
     LocalDateTime timestamp;
     Integer trangThai;

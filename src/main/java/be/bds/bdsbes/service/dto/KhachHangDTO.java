@@ -17,7 +17,6 @@ public class KhachHangDTO {
     private String diaChi;
     private String sdt;
     private String cccd;
-    private Long idTheThanhVien;
     private String ghiChu;
 
     public KhachHang dto(KhachHang khachHang) {

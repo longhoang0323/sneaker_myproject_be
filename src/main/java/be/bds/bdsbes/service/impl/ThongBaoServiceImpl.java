@@ -3,6 +3,7 @@ package be.bds.bdsbes.service.impl;
 import be.bds.bdsbes.domain.User;
 import be.bds.bdsbes.entities.ThongBao;
 import be.bds.bdsbes.exception.ServiceException;
+import be.bds.bdsbes.repository.ThongBaoRepository;
 import be.bds.bdsbes.service.iService.IThongBaoService;
 import be.bds.bdsbes.service.dto.ThongBaoDTO;
 import be.bds.bdsbes.service.dto.response.ThongBaoResponse;
@@ -94,7 +95,6 @@ public class ThongBaoServiceImpl implements IThongBaoService {
     public Boolean create(ThongBaoDTO thongBaoDTO){
 
         ThongBao thongBao = new ThongBao();
-        thongBao.setMaDatPhong(thongBaoDTO.getMaDatPhong());
         thongBao.setNoiDung(thongBaoDTO.getNoiDung());
         thongBao.setTrangThai(thongBaoDTO.getTrangThai());
         thongBao.setTimestamp(LocalDateTime.now());

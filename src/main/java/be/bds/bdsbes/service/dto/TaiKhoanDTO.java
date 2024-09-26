@@ -39,8 +39,7 @@ public class TaiKhoanDTO {
         taiKhoan.setMatKhau(this.getMatKhau());
         taiKhoan.setTrangThai(this.getTrangThai());
         taiKhoan.setTen(this.getTen());
-        taiKhoan.setKhachHang(KhachHang.builder().id(this.getIdKhachHang()).ma("KH" + ma).hoTen(this.getTen())
-                .theThanhVien(TheThanhVien.builder().id(1L).build()).build());
+        taiKhoan.setKhachHang(KhachHang.builder().id(this.getIdKhachHang()).ma("KH" + ma).hoTen(this.getTen()).build());
         return taiKhoan;
     }
 }

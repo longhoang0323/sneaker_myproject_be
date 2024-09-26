@@ -20,7 +20,7 @@ import java.util.List;
 
 @Slf4j
 @RestController
-@RequestMapping("/rpc/bds/tai-khoan")
+@RequestMapping("/myproject/sneaker/tai-khoan")
 public class TaiKhoanController {
 
     @Autowired

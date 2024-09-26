@@ -25,9 +25,6 @@ public class PagedResponse<T> {
         this.sort = sort;
     }
 
-    public PagedResponse(List<PhongResponse1> listPhong, int page, int size, long totalElements, int totalPages, boolean last, String string, List<Phong> dtos) {
-    }
-
     public List<T> getContent() {
         return content;
     }

@@ -37,56 +37,54 @@ public class FeedbackServiceImpl implements IFeedBackService {
     KhachHangRepository khachHangRepository;
 
     @Autowired
-    ChiTietPhongRepository chiTietPhongRepository;
-
-    @Autowired
     FeedbackMapper feedbackMapper;
 
     @Override
     public Boolean create(FeedbackDTO feedbackDTO) {
         FeedBack feedBack = new FeedBack();
-        Long idChiTietPhong = chiTietPhongRepository.findByIdCTP(feedbackDTO.getIdChiTietPhong());
-        feedBack.setChiTietPhong(ChiTietPhong.builder().id(idChiTietPhong).build());
-        Long idKH = khachHangRepository.findByI(feedbackDTO.getIdKhachHang());
-        feedBack.setKhachHang(KhachHang.builder().id(idKH).build());
-        feedBack.setMoTa(feedbackDTO.getMoTa());
-        feedBack.setTrangThai(feedbackDTO.getTrangThai());
-        feedbackRepository.save(feedBack);
+//        Long idChiTietPhong = chiTietPhongRepository.findByIdCTP(feedbackDTO.getIdChiTietPhong());
+//        feedBack.setChiTietPhong(ChiTietPhong.builder().id(idChiTietPhong).build());
+//        Long idKH = khachHangRepository.findByI(feedbackDTO.getIdKhachHang());
+//        feedBack.setKhachHang(KhachHang.builder().id(idKH).build());
+//        feedBack.setMoTa(feedbackDTO.getMoTa());
+//        feedBack.setTrangThai(feedbackDTO.getTrangThai());
+//        feedbackRepository.save(feedBack);
         return true;
     }
 
     @Override
     public PagedResponse<FeedbackResponse> listFeedback(int page, int size, Long idChiTietPhong) throws ServiceException {
-        if (page <= 0) {
-            throw ServiceExceptionBuilderUtil.newBuilder()
-                    .addError(new ValidationErrorResponse("page", ValidationErrorUtil.Invalid))
-                    .build();
-        }
-
-        if (size > AppConstantsUtil.MAX_PAGE_SIZE) {
-            List<KeyValue> params = new ArrayList<>();
-            params.add(new KeyValue("max", String.valueOf(AppConstantsUtil.MAX_PAGE_SIZE)));
-
-            throw ServiceExceptionBuilderUtil.newBuilder()
-                    .addError(new ValidationErrorResponse("pageSize", ValidationErrorUtil.Invalid, params))
-                    .build();
-        }
-
-        // Retrieve all entities
-        Pageable pageable = PageRequest.of((page - 1), size, Sort.Direction.DESC, "id");
-        Long idChiTietPhongs = chiTietPhongRepository.findByIdCTP(idChiTietPhong);
-        Page<FeedBack> entities = feedbackRepository.listAll(pageable, idChiTietPhongs);
-
-        List<FeedbackResponse> dtos = this.feedbackMapper.toDtoList(entities.getContent());
-        return new PagedResponse<>(
-                dtos,
-                page,
-                size,
-                entities.getTotalElements(),
-                entities.getTotalPages(),
-                entities.isLast(),
-                entities.getSort().toString()
-        );
+//        if (page <= 0) {
+//            throw ServiceExceptionBuilderUtil.newBuilder()
+//                    .addError(new ValidationErrorResponse("page", ValidationErrorUtil.Invalid))
+//                    .build();
+//        }
+//
+//        if (size > AppConstantsUtil.MAX_PAGE_SIZE) {
+//            List<KeyValue> params = new ArrayList<>();
+//            params.add(new KeyValue("max", String.valueOf(AppConstantsUtil.MAX_PAGE_SIZE)));
+//
+//            throw ServiceExceptionBuilderUtil.newBuilder()
+//                    .addError(new ValidationErrorResponse("pageSize", ValidationErrorUtil.Invalid, params))
+//                    .build();
+//        }
+//
+//        // Retrieve all entities
+//        Pageable pageable = PageRequest.of((page - 1), size, Sort.Direction.DESC, "id");
+//        Long idChiTietPhongs = chiTietPhongRepository.findByIdCTP(idChiTietPhong);
+//        Page<FeedBack> entities = feedbackRepository.listAll(pageable, idChiTietPhongs);
+//
+//        List<FeedbackResponse> dtos = this.feedbackMapper.toDtoList(entities.getContent());
+//        return new PagedResponse<>(
+//                dtos,
+//                page,
+//                size,
+//                entities.getTotalElements(),
+//                entities.getTotalPages(),
+//                entities.isLast(),
+//                entities.getSort().toString()
+//        );
+        return null;
     }
 
     @Override
