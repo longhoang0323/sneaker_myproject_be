@@ -1,8 +1,6 @@
 package be.bds.bdsbes.service.mapper;
 
-import be.bds.bdsbes.entities.BaoTri;
 import be.bds.bdsbes.entities.ThongBao;
-import be.bds.bdsbes.payload.BaoTriResponse1;
 import be.bds.bdsbes.service.dto.response.ThongBaoResponse;
 import org.mapstruct.*;
 

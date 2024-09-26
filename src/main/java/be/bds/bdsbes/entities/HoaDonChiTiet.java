@@ -18,8 +18,6 @@ import java.math.BigDecimal;
 public class HoaDonChiTiet {
     public static final String TABLE_NAME = "hoa_don_chi_tiet";
     public static final String COLUMN_ID_NAME = "id";
-    public static final String COLUMN_GIA_NAME = "gia";
-    public static final String COLUMN_GHICHU_NAME = "ghi_chu";
     public static final String COLUMN_TRANGTHAI_NAME = "trang_thai";
 
 
@@ -33,18 +31,22 @@ public class HoaDonChiTiet {
     private HoaDon hoaDon;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "id_chi_tiet_phong")
-    private ChiTietPhong chiTietPhong;
+    @JoinColumn(name = "id_ctsp")
+    private ChiTietSanPham chiTietSanPham;
 
-    @Column(name = COLUMN_GIA_NAME, precision = 18)
-    private BigDecimal gia;
+    @Column(name = "don_gia")
+    private BigDecimal donGia;
 
-    @Size(max = 100)
-    @Nationalized
-    @Column(name = COLUMN_GHICHU_NAME, length = 100)
-    private String ghiChu;
+    @Column(name = "gia_ban")
+    private BigDecimal giaBan;
+
+    @Column(name = "so_luong")
+    private int soLuong;
+
+    @Column(name = "giam_gia")
+    private BigDecimal giamGia;
 
     @Column(name = COLUMN_TRANGTHAI_NAME)
-    private Integer trangThai;
+    private BigDecimal trangThai;
 
 }

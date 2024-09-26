@@ -95,7 +95,6 @@ public class ThongBaoServiceImpl implements IThongBaoService {
     public Boolean create(ThongBaoDTO thongBaoDTO){
 
         ThongBao thongBao = new ThongBao();
-        thongBao.setMaDatPhong(thongBaoDTO.getMaDatPhong());
         thongBao.setNoiDung(thongBaoDTO.getNoiDung());
         thongBao.setTrangThai(thongBaoDTO.getTrangThai());
         thongBao.setTimestamp(LocalDateTime.now());

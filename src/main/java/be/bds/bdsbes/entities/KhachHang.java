@@ -7,6 +7,7 @@ import org.hibernate.annotations.Nationalized;
 import javax.persistence.*;
 import javax.validation.constraints.Size;
 import java.time.LocalDate;
+import java.util.Date;
 import java.util.LinkedHashSet;
 import java.util.Set;
 
@@ -58,28 +59,11 @@ public class KhachHang {
     @Column(name = COLUMN_SDT_NAME, length = 11)
     private String sdt;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "id_the_thanh_vien")
-    private TheThanhVien theThanhVien;
+    @Column(name = "tich_diem")
+    private int tichDiem;
 
-    @Nationalized
-    @Lob
-    @Column(name = COLUMN_GHICHU_NAME)
-    private String ghiChu;
-
-    @ManyToOne(cascade = CascadeType.MERGE)
-    @JoinColumn(name = "id_voucher")
-    private Voucher voucher;
-
-    @Size(max = 20)
-    @Column(name = "cccd", length = 13)
-    private String cccd;
-
-    @OneToMany(mappedBy = "khachHang")
-    private Set<DichVuSuDung> dichVuSuDungs = new LinkedHashSet<>();
-
-    @OneToMany(mappedBy = "khachHang")
-    private Set<FeedBack> feedBacks = new LinkedHashSet<>();
+    @Column(name = "thoi_han")
+    private Date thoiHan;
 
     @OneToMany(mappedBy = "khachHang")
     private Set<HoaDon> hoaDons = new LinkedHashSet<>();

@@ -47,6 +47,9 @@ public class Voucher {
     @Column(name = COLUMN_GIAMGIA_NAME, precision = 18)
     private BigDecimal giamGia;
 
+    @Column(name = "loai_giam_gia")
+    private Integer loaiGiamGia;
+
     @Column(name = COLUMN_NGAYBATDAU_NAME)
     private LocalDate ngayBatDau;
 
@@ -58,8 +61,5 @@ public class Voucher {
 
     @Column(name = COLUMN_SOLUONG_NAME)
     private Integer soLuong;
-
-    @OneToMany(mappedBy = "voucher")
-    private Set<KhachHang> khachHangs = new LinkedHashSet<>();
 
 }

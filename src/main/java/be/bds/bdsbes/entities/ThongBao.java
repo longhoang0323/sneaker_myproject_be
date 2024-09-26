@@ -31,13 +31,8 @@ public class ThongBao {
     private Long id;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "user_id")
+    @JoinColumn(name = "id_user")
     private User user;
-
-    @Size(max = 50)
-    @Nationalized
-    @Column(name = COLUMN_MADATPHONG_NAME, length = 50)
-    private String maDatPhong;
 
     @Nationalized
     @Lob

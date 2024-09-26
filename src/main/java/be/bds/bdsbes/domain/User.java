@@ -1,6 +1,5 @@
 package be.bds.bdsbes.domain;
 
-import be.bds.bdsbes.entities.DatPhong;
 import be.bds.bdsbes.entities.KhachHang;
 import be.bds.bdsbes.entities.ThongBao;
 import be.bds.bdsbes.utils.ValidationErrorUtil;
@@ -73,10 +72,6 @@ public class User extends DateAudit {
             joinColumns = @JoinColumn(name = "user_id"),
             inverseJoinColumns = @JoinColumn(name = "role_id"))
     private Set<Role> roles = new HashSet<>();
-
-
-    @OneToMany(mappedBy = "khachHang")
-    private Set<DatPhong> datPhongs = new LinkedHashSet<>();
 
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
     private Set<ThongBao> thongBaos = new LinkedHashSet<>();

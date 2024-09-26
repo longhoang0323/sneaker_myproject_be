@@ -14,8 +14,6 @@ public interface IKhachHangService {
 
     List<KhachHang> getList();
 
-    Page<KhachHang> getPage(Integer page);
-
     KhachHangResponse1 getOne(Long id);
 
     KhachHang create(KhachHangDTO khachHangDTO);
@@ -24,21 +22,9 @@ public interface IKhachHangService {
 
     PagedResponse<KhachHangResponse1> getKhachHang(int page, int size) throws ServiceException;
 
-    Boolean createOrUpdate(KhachHangDTO khachHangDTO) throws ServiceException;
-
-    Long findIdByCCCD(String cccd);
-
     KhachHangResponse1 getKhachHangbyUser(Long id);
 
     Boolean updateKH(KhachHangDTO khachHangDTO, Long id);
 
-    KhachHangResponse1 getKHbyCccd(String cccd);
-
-    Integer updateGhiChu(String ghiChu, Long id) throws MessagingException;
-
-    Integer updateGhiChu2(String ghiChu, Long id) throws MessagingException;
-
     PagedResponse<KhachHangResponse1> getListBySearch(int page, int size, String inputSearch) throws ServiceException;
-
-    Integer sendPointstoCustomer(Long id) throws MessagingException;
 }

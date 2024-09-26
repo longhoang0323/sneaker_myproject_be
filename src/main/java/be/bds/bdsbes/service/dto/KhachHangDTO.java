@@ -1,8 +1,6 @@
 package be.bds.bdsbes.service.dto;
 
 import be.bds.bdsbes.entities.KhachHang;
-import be.bds.bdsbes.entities.TaiKhoan;
-import be.bds.bdsbes.entities.TheThanhVien;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -19,7 +17,6 @@ public class KhachHangDTO {
     private String diaChi;
     private String sdt;
     private String cccd;
-    private Long idTheThanhVien;
     private String ghiChu;
 
     public KhachHang dto(KhachHang khachHang) {

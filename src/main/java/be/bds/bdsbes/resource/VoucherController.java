@@ -19,7 +19,7 @@ import java.util.List;
 
 @Slf4j
 @RestController
-@RequestMapping("/rpc/bds/voucher")
+@RequestMapping("/myproject/sneaker/voucher")
 public class VoucherController {
     @Autowired
     private IVoucherService iVoucherService = new VoucherServiceImpl();

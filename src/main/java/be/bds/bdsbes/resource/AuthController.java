@@ -23,7 +23,7 @@ import java.util.Random;
 
 @Slf4j
 @RestController
-@RequestMapping("/rpc/bds/auth")
+@RequestMapping("/myproject/sneaker/auth")
 public class AuthController {
 
     @Autowired

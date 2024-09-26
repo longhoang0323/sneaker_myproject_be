@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.client.RestTemplate;
 
 @Controller
-@RequestMapping("/rpc/bds/recaptcha")
+@RequestMapping("/myproject/sneaker/recaptcha")
 public class CaptchaController {
 
     @Value("${google.recaptcha.secret-key}")

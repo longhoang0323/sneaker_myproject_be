@@ -2,16 +2,12 @@ package be.bds.bdsbes.service.dto;
 
 import be.bds.bdsbes.entities.KhachHang;
 import be.bds.bdsbes.entities.TaiKhoan;
-import be.bds.bdsbes.entities.TheThanhVien;
 import lombok.Getter;
 import lombok.Setter;
 import org.hibernate.validator.constraints.Length;
 
 import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
-import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.util.Random;
 
 @Getter
@@ -43,8 +39,7 @@ public class TaiKhoanDTO {
         taiKhoan.setMatKhau(this.getMatKhau());
         taiKhoan.setTrangThai(this.getTrangThai());
         taiKhoan.setTen(this.getTen());
-        taiKhoan.setKhachHang(KhachHang.builder().id(this.getIdKhachHang()).ma("KH" + ma).hoTen(this.getTen())
-                .theThanhVien(TheThanhVien.builder().id(1L).build()).build());
+        taiKhoan.setKhachHang(KhachHang.builder().id(this.getIdKhachHang()).ma("KH" + ma).hoTen(this.getTen()).build());
         return taiKhoan;
     }
 }

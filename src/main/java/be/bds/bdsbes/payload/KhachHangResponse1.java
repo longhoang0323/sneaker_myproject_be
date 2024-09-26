@@ -1,6 +1,5 @@
 package be.bds.bdsbes.payload;
 
-import be.bds.bdsbes.entities.TheThanhVien;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -8,6 +7,7 @@ import lombok.Setter;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
+import java.util.Date;
 
 @Getter
 @Setter
@@ -29,12 +29,8 @@ public class KhachHangResponse1 {
 
     private String sdt;
 
-    private String cccd;
+    private int tichDiem;
 
-    private String ghiChu;
-
-    private String rank;
-
-    private BigDecimal giamGia;
+    private Date thoiHan;
 
 }
