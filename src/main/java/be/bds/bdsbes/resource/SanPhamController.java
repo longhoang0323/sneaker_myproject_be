@@ -51,7 +51,13 @@ public class SanPhamController {
 
     @PutMapping("update-status")
     public ResponseEntity<?> updateStatus(@RequestParam(value = "id") Long id,
-                                          @RequestBody SanPhamDTO sanPhamDTO) {
-        return ResponseEntity.ok(iSanPhamService.updateTrangThai(id, sanPhamDTO));
+                                          @RequestBody int trangThai) {
+        return ResponseEntity.ok(iSanPhamService.updateTrangThai(id, trangThai));
+    }
+
+    @PutMapping("update-image-default")
+    public ResponseEntity<?> updateImageDefault(@RequestParam(value = "id") Long id,
+                                          @RequestBody String imageDefault) {
+        return ResponseEntity.ok(iSanPhamService.updateImageDefault(id, imageDefault));
     }
 }

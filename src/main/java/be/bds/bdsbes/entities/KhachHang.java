@@ -65,6 +65,9 @@ public class KhachHang {
     @Column(name = "thoi_han")
     private Date thoiHan;
 
+    @Column(name = "trang_thai")
+    private int trangThai;
+
     @OneToMany(mappedBy = "khachHang")
     private Set<HoaDon> hoaDons = new LinkedHashSet<>();
 

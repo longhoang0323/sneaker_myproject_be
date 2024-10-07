@@ -70,27 +70,25 @@ public class SanPhamServiceImpl implements ISanPhamService {
             sanPham.setTen(sanPhamDTO.getTen());
             sanPham.setHang(Hang.builder().id(sanPhamDTO.getIdHang()).build());
             sanPham.setChatLieu(ChatLieu.builder().id(sanPhamDTO.getIdChatLieu()).build());
-            sanPham.setImageDefault(sanPhamDTO.getImageDefault());
             return sanPhamRepository.save(sanPham);
         }
         return null;
     }
 
     @Override
-    public SanPham get(Long id) {
-        if(sanPhamRepository.findById(id).isPresent()) {
-            return sanPhamRepository.findById(id).get();
-        }
-        return null;
+    public SanPhamResponse get(Long id) {
+        return sanPhamRepository.getOneById(id);
     }
 
     @Override
-    public SanPham updateTrangThai(Long id, SanPhamDTO sanPhamDTO) {
-        if(sanPhamRepository.findById(id).isPresent()) {
-            SanPham sanPham = sanPhamRepository.findById(id).get();
-            sanPham.setTrangThai(sanPhamDTO.getTrangThai());
-            return sanPhamRepository.save(sanPham);
-        }
-        return null;
+    public int updateTrangThai(Long id, int trangThai) {
+        this.sanPhamRepository.updateTrangThaiById(trangThai, id);
+        return 1;
+    }
+
+    @Override
+    public int updateImageDefault(Long id, String imageDefault) {
+        this.sanPhamRepository.updateImageDefaultById(imageDefault, id);
+        return 1;
     }
 }

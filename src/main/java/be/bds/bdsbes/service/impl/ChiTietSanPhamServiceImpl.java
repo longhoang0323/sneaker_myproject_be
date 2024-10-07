@@ -4,11 +4,15 @@ import be.bds.bdsbes.entities.ChiTietSanPham;
 import be.bds.bdsbes.entities.KichThuoc;
 import be.bds.bdsbes.entities.MauSac;
 import be.bds.bdsbes.entities.SanPham;
+import be.bds.bdsbes.exception.ServiceException;
 import be.bds.bdsbes.payload.ChiTietSanPhamResponse;
 import be.bds.bdsbes.repository.ChiTietSanPhamRepository;
 import be.bds.bdsbes.service.dto.ChiTietSanPhamDTO;
 import be.bds.bdsbes.service.iService.IChiTietSanPhamService;
+import be.bds.bdsbes.utils.ServiceExceptionBuilderUtil;
+import be.bds.bdsbes.utils.ValidationErrorUtil;
 import be.bds.bdsbes.utils.dto.PagedResponse;
+import be.bds.bdsbes.utils.dto.ValidationErrorResponse;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -61,7 +65,33 @@ public class ChiTietSanPhamServiceImpl implements IChiTietSanPhamService {
     }
 
     @Override
-    public ChiTietSanPham create(ChiTietSanPhamDTO chiTietSanPhamDTO) {
+    public PagedResponse<ChiTietSanPhamResponse> getAllBySanPham(int page, int size, Long id) {
+        Pageable pageable = PageRequest.of((page - 1), size, Sort.Direction.DESC, "id");
+        Page<ChiTietSanPhamResponse> entities = chiTietSanPhamRepository.getAllBySP(pageable, id);
+        List<ChiTietSanPhamResponse> dtos = entities.toList();
+        return new PagedResponse<>(
+                dtos,
+                page,
+                size,
+                entities.getTotalElements(),
+                entities.getTotalPages(),
+                entities.isLast(),
+                entities.getSort().toString()
+        );
+    }
+
+    @Override
+    public ChiTietSanPham create(ChiTietSanPhamDTO chiTietSanPhamDTO) throws ServiceException {
+        List<ChiTietSanPham> list = chiTietSanPhamRepository.findAll();
+        for (ChiTietSanPham ct: list) {
+            if(ct.getSanPham().getId().equals(chiTietSanPhamDTO.getIdSanPham()) &&
+               ct.getMauSac().getId().equals(chiTietSanPhamDTO.getIdMauSac()) &&
+               ct.getKichThuoc().getId().equals(chiTietSanPhamDTO.getIdKichThuoc())){
+                throw ServiceExceptionBuilderUtil.newBuilder()
+                        .addError(new ValidationErrorResponse("idSanPham", ValidationErrorUtil.IdSanPham))
+                        .build();
+            }
+        }
         ChiTietSanPham chiTietSanPham = chiTietSanPhamDTO.dto(new ChiTietSanPham());
         chiTietSanPham.setMa(generateAutoCode());
         return chiTietSanPhamRepository.save(chiTietSanPham);
@@ -84,20 +114,13 @@ public class ChiTietSanPhamServiceImpl implements IChiTietSanPhamService {
     }
 
     @Override
-    public ChiTietSanPham get(Long id) {
-        if(chiTietSanPhamRepository.findById(id).isPresent()){
-            return chiTietSanPhamRepository.findById(id).get();
-        }
-        return null;
+    public ChiTietSanPhamResponse get(Long id) {
+        return chiTietSanPhamRepository.getCTSPById(id);
     }
 
     @Override
-    public ChiTietSanPham updateTrangThai(Long id, ChiTietSanPhamDTO chiTietSanPhamDTO) {
-        if(chiTietSanPhamRepository.findById(id).isPresent()){
-            ChiTietSanPham chiTietSanPham = chiTietSanPhamRepository.findById(id).get();
-            chiTietSanPham.setTrangThai(chiTietSanPhamDTO.getTrangThai());
-            return chiTietSanPhamRepository.save(chiTietSanPham);
-        }
-        return null;
+    public int updateTrangThai(Long id, int trangThai) {
+        this.chiTietSanPhamRepository.updateTrangThaiById(trangThai, id);
+        return 1;
     }
 }

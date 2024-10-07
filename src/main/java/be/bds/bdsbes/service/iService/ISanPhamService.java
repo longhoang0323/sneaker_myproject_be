@@ -13,7 +13,9 @@ public interface ISanPhamService {
 
     SanPham update(Long id, SanPhamDTO sanPhamDTO);
 
-    SanPham get(Long id);
+    SanPhamResponse get(Long id);
 
-    SanPham updateTrangThai(Long id, SanPhamDTO sanPhamDTO);
+    int updateTrangThai(Long id, int trangThai);
+
+    int updateImageDefault(Long id, String imageDefault);
 }

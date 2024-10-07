@@ -14,7 +14,7 @@ import javax.persistence.*;
 @Table(name = MauSac.TABLE_NAME)
 public class MauSac {
 
-    public static final String TABLE_NAME = "san_pham";
+    public static final String TABLE_NAME = "mau_sac";
     public static final String COLUMN_ID_NAME = "id";
     public static final String COLUMN_MA_NAME = "ma";
     public static final String COLUMN_TEN_NAME = "ten";

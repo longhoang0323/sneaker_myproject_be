@@ -1,6 +1,7 @@
 package be.bds.bdsbes.resource;
 
 
+import be.bds.bdsbes.exception.ServiceException;
 import be.bds.bdsbes.service.dto.ChiTietSanPhamDTO;
 import be.bds.bdsbes.service.iService.IChiTietSanPhamService;
 import be.bds.bdsbes.utils.AppConstantsUtil;
@@ -40,8 +41,13 @@ public class ChiTietSanPhamController {
 
     @PostMapping("create")
     public ResponseEntity<?> create(
-            @RequestBody @Valid ChiTietSanPhamDTO chiTietSanPhamDTO, BindingResult bindingResult) {
-        return ResponseEntity.ok(iChiTietSanPhamService.create(chiTietSanPhamDTO));
+            @RequestBody @Valid ChiTietSanPhamDTO chiTietSanPhamDTO) {
+        try {
+            return ResponseUtil.wrap(iChiTietSanPhamService.create(chiTietSanPhamDTO));
+        } catch (ServiceException e) {
+            log.error(this.getClass().getName(), e);
+            return ResponseUtil.generateErrorResponse(e);
+        }
     }
 
     @PutMapping("update")
@@ -52,7 +58,20 @@ public class ChiTietSanPhamController {
 
     @PutMapping("update-status")
     public ResponseEntity<?> updateStatus(@RequestParam(value = "id") Long id,
-                                          @RequestBody ChiTietSanPhamDTO chiTietSanPhamDTO) {
-        return ResponseEntity.ok(iChiTietSanPhamService.updateTrangThai(id, chiTietSanPhamDTO));
+                                          @RequestBody int trangThai) {
+        return ResponseEntity.ok(iChiTietSanPhamService.updateTrangThai(id, trangThai));
+    }
+
+    @GetMapping("list-by-san-pham")
+    public ResponseEntity<?> getListBySanPham(
+            @RequestParam(value = "page", defaultValue = AppConstantsUtil.DEFAULT_PAGE_NUMBER) int page,
+            @RequestParam(value = "size", defaultValue = AppConstantsUtil.DEFAULT_PAGE_SIZE) int size,
+            @RequestParam(value = "idSanPham") Long id) {
+        try {
+            return ResponseUtil.wrap(this.iChiTietSanPhamService.getAllBySanPham(page, size, id));
+        } catch (Exception ex) {
+            log.error(this.getClass().getName(), ex);
+            return ResponseUtil.generateErrorResponse(ex);
+        }
     }
 }
