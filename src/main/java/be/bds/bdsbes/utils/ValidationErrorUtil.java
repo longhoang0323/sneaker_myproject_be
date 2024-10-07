@@ -27,9 +27,5 @@ public @interface ValidationErrorUtil {
     String NotFound = "validation.constraints.NotFound";
     String Invalid = "validation.constraints.Invalid";
     String InUse = "validation.constraints.InUse";
-    String CheckIn = "validation.constraints.CheckIn";
-    String CheckDateBook = "validation.constraints.CheckDateBook";
-    String CheckInBeforeDateNow = "validation.constraints.CheckInBeforeDateNow";
-
-    String DeleteRoomOrder = "validation.constraints.DeleteRoomOrder";
+    String IdSanPham = "validation.constraints.IdSanPham";
 }

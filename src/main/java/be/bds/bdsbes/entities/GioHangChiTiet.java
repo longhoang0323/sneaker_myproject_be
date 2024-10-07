@@ -1,10 +1,9 @@
 package be.bds.bdsbes.entities;
 
+import be.bds.bdsbes.domain.User;
 import lombok.*;
-import org.hibernate.annotations.Nationalized;
 
 import javax.persistence.*;
-import javax.validation.constraints.Size;
 import java.math.BigDecimal;
 
 @Builder
@@ -14,12 +13,11 @@ import java.math.BigDecimal;
 @Setter
 @ToString
 @Entity
-@Table(name = HoaDonChiTiet.TABLE_NAME)
-public class HoaDonChiTiet {
-    public static final String TABLE_NAME = "hoa_don_chi_tiet";
-    public static final String COLUMN_ID_NAME = "id";
-    public static final String COLUMN_TRANGTHAI_NAME = "trang_thai";
+@Table(name = GioHangChiTiet.TABLE_NAME)
+public class GioHangChiTiet {
 
+    public static final String TABLE_NAME = "gio_hang_chi_tiet";
+    public static final String COLUMN_ID_NAME = "id";
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -27,12 +25,12 @@ public class HoaDonChiTiet {
     private Long id;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "id_hoa_don")
-    private HoaDon hoaDon;
-
-    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "id_ctsp")
     private ChiTietSanPham chiTietSanPham;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "id_user")
+    private User user;
 
     @Column(name = "don_gia")
     private BigDecimal donGia;
@@ -46,7 +44,6 @@ public class HoaDonChiTiet {
     @Column(name = "giam_gia")
     private BigDecimal giamGia;
 
-    @Column(name = COLUMN_TRANGTHAI_NAME)
-    private int trangThai;
-
+    @Column(name = "trang_thai")
+    private BigDecimal trangThai;
 }
