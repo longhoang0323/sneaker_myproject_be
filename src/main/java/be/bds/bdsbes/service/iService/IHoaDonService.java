@@ -11,5 +11,9 @@ public interface IHoaDonService {
 
     HoaDon createTaiQuay(HoaDonDTO hoaDonDTO);
 
+    HoaDon datHangOnline(HoaDonDTO hoaDonDTO);
+
+    HoaDonResponse thanhToanHoaDon(Long id, HoaDonDTO hoaDonDTO);
+
     HoaDonResponse get(Long id);
 }

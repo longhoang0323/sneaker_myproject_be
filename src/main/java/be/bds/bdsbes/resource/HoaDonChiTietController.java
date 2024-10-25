@@ -33,6 +33,19 @@ public class HoaDonChiTietController {
         }
     }
 
+    @GetMapping("list-by-bill")
+    public ResponseEntity<?> getListByIdHoaDon(
+            @RequestParam(value = "page", defaultValue = AppConstantsUtil.DEFAULT_PAGE_NUMBER) int page,
+            @RequestParam(value = "size", defaultValue = AppConstantsUtil.DEFAULT_PAGE_SIZE) int size,
+            @RequestParam(value = "idHoaDon") Long idHoaDon) {
+        try {
+            return ResponseUtil.wrap(this.iHoaDonChiTietService.getAllByIdHoaDon(page, size, idHoaDon));
+        } catch (Exception ex) {
+            log.error(this.getClass().getName(), ex);
+            return ResponseUtil.generateErrorResponse(ex);
+        }
+    }
+
     @PostMapping("create-new-hdct")
     public ResponseEntity<?> createNewHDCT(
             @RequestBody @Valid HoaDonChiTietDTO hoaDonChiTietDTO, BindingResult bindingResult) {

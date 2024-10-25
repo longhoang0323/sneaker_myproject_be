@@ -83,6 +83,12 @@ public class HoaDon {
     @Column(name = "tong_thanh_toan", precision = 18)
     private BigDecimal tongThanhToan;
 
+    @Column(name = "tien_mat", precision = 18)
+    private BigDecimal tienMat;
+
+    @Column(name = "chuyen_khoan", precision = 18)
+    private BigDecimal chuyenKhoan;
+
     @Column(name = COLUMN_TRANGTHAI_NAME)
     private Integer trangThai;
 
@@ -90,6 +96,10 @@ public class HoaDon {
     @Lob
     @Column(name = COLUMN_GHICHU_NAME)
     private String ghiChu;
+
+    @ManyToOne(cascade = CascadeType.MERGE)
+    @JoinColumn(name = "id_voucher")
+    private Voucher voucher;
 
     @OneToMany(mappedBy = "hoaDon")
     private Set<HoaDonChiTiet> hoaDonChiTiets = new LinkedHashSet<>();

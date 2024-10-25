@@ -5,6 +5,8 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.math.BigDecimal;
+
 @Getter
 @Setter
 @AllArgsConstructor
@@ -28,5 +30,11 @@ public class SanPhamResponse {
     private int trangThai;
 
     private String imageDefault;
+
+    private String qrCode;
+
+    private BigDecimal giaThapNhat;
+
+    private BigDecimal giaCaoNhat;
 
 }

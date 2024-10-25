@@ -74,4 +74,30 @@ public class ChiTietSanPhamController {
             return ResponseUtil.generateErrorResponse(ex);
         }
     }
+
+    @GetMapping("get-one-by-color-and-size")
+    public ResponseEntity<?> details(@RequestParam(value = "idMauSac") Long idMauSac,
+                                     @RequestParam(value = "idKichThuoc") Long idKichThuoc,
+                                     @RequestParam(value = "idSanPham") Long idSanPham){
+        try{
+        return ResponseEntity.ok(iChiTietSanPhamService.getByColorAndSize(idMauSac, idKichThuoc, idSanPham));
+        } catch (ServiceException e) {
+            log.error(this.getClass().getName(), e);
+            return ResponseUtil.generateErrorResponse(e);
+        }
+    }
+
+    @GetMapping("list-by-san-pham-and-color")
+    public ResponseEntity<?> getListBySanPhamAndColor(
+            @RequestParam(value = "page", defaultValue = AppConstantsUtil.DEFAULT_PAGE_NUMBER) int page,
+            @RequestParam(value = "size", defaultValue = AppConstantsUtil.DEFAULT_PAGE_SIZE) int size,
+            @RequestParam(value = "idSanPham") Long id,
+            @RequestParam(value = "idMauSac") Long idMauSac) {
+        try {
+            return ResponseUtil.wrap(this.iChiTietSanPhamService.getAllBySanPhamAndColor(page, size, id, idMauSac));
+        } catch (Exception ex) {
+            log.error(this.getClass().getName(), ex);
+            return ResponseUtil.generateErrorResponse(ex);
+        }
+    }
 }

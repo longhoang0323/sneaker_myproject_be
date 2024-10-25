@@ -23,6 +23,8 @@ public class SanPhamDTO {
 
     private String imageDefault;
 
+    private String qrCode;
+
 
     public SanPham dto(SanPham sanPham){
         sanPham.setTen(this.getTen());
@@ -30,6 +32,7 @@ public class SanPhamDTO {
         sanPham.setChatLieu(ChatLieu.builder().id(this.getIdChatLieu()).build());
         sanPham.setTrangThai(0);
         sanPham.setImageDefault(this.getImageDefault());
+        sanPham.setQrCode(this.getQrCode());
         return sanPham;
     }
 }

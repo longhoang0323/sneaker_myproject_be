@@ -15,7 +15,7 @@ public class VNPAYConfig {
     @Getter
     @Value("https://sandbox.vnpayment.vn/paymentv2/vpcpay.html")
     private String vnp_PayUrl;
-    @Value("http://localhost:8080/myproject/sneaker/pay-ment/vn-pay/callback")
+    @Value("http://localhost:4200/product")
     private String vnp_ReturnUrl;
     @Value("D6F170M5")
     private String vnp_TmnCode ;

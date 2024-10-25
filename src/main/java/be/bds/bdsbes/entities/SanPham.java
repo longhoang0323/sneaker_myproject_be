@@ -44,4 +44,7 @@ public class SanPham {
 
     @Column(name = "image_default")
     private String imageDefault;
+
+    @Column(name = "qr_code")
+    private String qrCode;
 }

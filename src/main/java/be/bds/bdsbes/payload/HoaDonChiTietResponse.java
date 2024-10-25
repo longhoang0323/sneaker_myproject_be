@@ -41,4 +41,6 @@ public class HoaDonChiTietResponse {
 
     private int trangThai;
 
+    private String imageCTSP;
+
 }

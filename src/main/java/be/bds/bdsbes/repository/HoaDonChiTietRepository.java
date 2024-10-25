@@ -13,15 +13,22 @@ public interface HoaDonChiTietRepository extends JpaRepository<HoaDonChiTiet, Lo
 
     @Query("select new be.bds.bdsbes.payload.HoaDonChiTietResponse" +
             "(hdct.id, hdct.hoaDon.id, hdct.chiTietSanPham.id, hdct.donGia, hdct.giaBan, hdct.giamGia, " +
-            "hdct.soLuong, hdct.chiTietSanPham.sanPham.ma, hdct.chiTietSanPham.sanPham.ma, " +
+            "hdct.soLuong, hdct.chiTietSanPham.sanPham.ma, hdct.chiTietSanPham.sanPham.ten, " +
             "hdct.chiTietSanPham.sanPham.hang.ten, hdct.chiTietSanPham.sanPham.chatLieu.ten, " +
-            "hdct.chiTietSanPham.kichThuoc.ten, hdct.chiTietSanPham.mauSac.ten, hdct.trangThai) from HoaDonChiTiet hdct")
+            "hdct.chiTietSanPham.kichThuoc.ten, hdct.chiTietSanPham.mauSac.ten, hdct.trangThai, hdct.chiTietSanPham.image) from HoaDonChiTiet hdct")
     Page<HoaDonChiTietResponse> getAll(Pageable pageable);
 
     @Query("select new be.bds.bdsbes.payload.HoaDonChiTietResponse" +
             "(hdct.id, hdct.hoaDon.id, hdct.chiTietSanPham.id, hdct.donGia, hdct.giaBan, hdct.giamGia, " +
-            "hdct.soLuong, hdct.chiTietSanPham.sanPham.ma, hdct.chiTietSanPham.sanPham.ma, " +
+            "hdct.soLuong, hdct.chiTietSanPham.sanPham.ma, hdct.chiTietSanPham.sanPham.ten, " +
             "hdct.chiTietSanPham.sanPham.hang.ten, hdct.chiTietSanPham.sanPham.chatLieu.ten, " +
-            "hdct.chiTietSanPham.kichThuoc.ten, hdct.chiTietSanPham.mauSac.ten, hdct.trangThai) from HoaDonChiTiet hdct where hdct.id = :id")
+            "hdct.chiTietSanPham.kichThuoc.ten, hdct.chiTietSanPham.mauSac.ten, hdct.trangThai, hdct.chiTietSanPham.image) from HoaDonChiTiet hdct where hdct.hoaDon.id = :idHoaDon")
+    Page<HoaDonChiTietResponse> getAllByIdHoaDon(Pageable pageable, Long idHoaDon);
+
+    @Query("select new be.bds.bdsbes.payload.HoaDonChiTietResponse" +
+            "(hdct.id, hdct.hoaDon.id, hdct.chiTietSanPham.id, hdct.donGia, hdct.giaBan, hdct.giamGia, " +
+            "hdct.soLuong, hdct.chiTietSanPham.sanPham.ma, hdct.chiTietSanPham.sanPham.ten, " +
+            "hdct.chiTietSanPham.sanPham.hang.ten, hdct.chiTietSanPham.sanPham.chatLieu.ten, " +
+            "hdct.chiTietSanPham.kichThuoc.ten, hdct.chiTietSanPham.mauSac.ten, hdct.trangThai, hdct.chiTietSanPham.image) from HoaDonChiTiet hdct where hdct.id = :id")
     HoaDonChiTietResponse getOneHDCT(Long id);
 }

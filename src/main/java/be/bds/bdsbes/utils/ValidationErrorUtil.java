@@ -28,4 +28,5 @@ public @interface ValidationErrorUtil {
     String Invalid = "validation.constraints.Invalid";
     String InUse = "validation.constraints.InUse";
     String IdSanPham = "validation.constraints.IdSanPham";
+    String checkIdChiTietSanPham = "validation.constraints.checkIdChiTietSanPham";
 }

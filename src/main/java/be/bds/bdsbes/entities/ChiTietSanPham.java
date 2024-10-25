@@ -41,6 +41,9 @@ public class ChiTietSanPham {
     @Column(name = "don_gia")
     private BigDecimal donGia;
 
+    @Column(name = "gia_ban")
+    private BigDecimal giaBan;
+
     @Column(name = "so_luong")
     private int soLuong;
 
