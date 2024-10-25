@@ -109,8 +109,8 @@ public class KhachHangServiceImpl implements IKhachHangService {
 
         // Retrieve all entities
         Pageable pageable = PageRequest.of((page - 1), size, Sort.Direction.ASC, "id");
-        Page<KhachHang> entities = khachHangRepository.findAll(pageable);
-        List<KhachHangResponse1> dtos = this.khachHangMapper.toDtoList(entities.getContent());
+        Page<KhachHangResponse1> entities = khachHangRepository.getAll(pageable);
+        List<KhachHangResponse1> dtos = entities.toList();
 
         return new PagedResponse<>(
                 dtos,
