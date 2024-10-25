@@ -1,20 +1,17 @@
 package be.bds.bdsbes.entities;
 
-import be.bds.bdsbes.domain.User;
 import lombok.*;
 
 import javax.persistence.*;
-import java.math.BigDecimal;
 
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
 @Getter
 @Setter
-@ToString
 @Entity
-@Table(name = "san_pham_khuyen_mai")
-public class SanPhamKhuyenMai {
+@Table(name = "khach_hang_khuyen_mai")
+public class KhachHangKhuyenMai {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -22,16 +19,13 @@ public class SanPhamKhuyenMai {
     private Long id;
 
     @ManyToOne(cascade = CascadeType.MERGE)
-    @JoinColumn(name = "id_ctsp")
-    private ChiTietSanPham chiTietSanPham;
+    @JoinColumn(name = "id_voucher")
+    private Voucher voucher;
 
     @ManyToOne(cascade = CascadeType.MERGE)
-    @JoinColumn(name = "id_dot_giam_gia")
-    private DotGiamGia dotGiamGia;
-
-    @Column(name = "gia_ban")
-    private BigDecimal giaBan;
+    @JoinColumn(name = "id_khach_hang")
+    private KhachHang khachHang;
 
     @Column(name = "trang_thai")
-    private int trangThai;
+    private Integer trangThai;
 }

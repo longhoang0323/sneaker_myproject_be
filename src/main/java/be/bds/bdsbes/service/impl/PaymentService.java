@@ -28,35 +28,6 @@ public class PaymentService {
 
     public static String secretKey = "ZNUOMDUQVCLUQQT7HU4HN6LH53623ZZ5";
 
-    public String createPaymentUrl(Long amount) throws Exception {
-        String orderInfo = "Thanh toan hoa don"; // Thông tin đơn hàng
-
-        Map<String, String> vnpParams = new LinkedHashMap<>();
-        vnpParams.put("vnp_Version", "2.0.0");
-        vnpParams.put("vnp_TmnCode", tmnCode);
-        vnpParams.put("vnp_IpAddr", "198.168.1.116");
-        vnpParams.put("vnp_Amount", "20000");
-        vnpParams.put("vnp_BankCode", "NCB");
-        vnpParams.put("vnp_Command", "pay");
-        vnpParams.put("vnp_CreateDate", LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyyMMddHHmmss")));
-        vnpParams.put("vnp_CurrCode", "VND");
-        vnpParams.put("vnp_OrderInfo", orderInfo);
-        vnpParams.put("vnp_OrderType", "topup");
-        vnpParams.put("vnp_Locale", "vn");
-        vnpParams.put("vnp_OrderId", "123456789");
-
-        String vnp_SecureHash = getSignature(vnpParams);
-        vnpParams.put("vnp_SecureHash", vnp_SecureHash);
-
-        StringBuilder queryString = new StringBuilder();
-        for (Map.Entry<String, String> entry : vnpParams.entrySet()) {
-            queryString.append(entry.getKey()).append("=").append(URLEncoder.encode(entry.getValue(), StandardCharsets.UTF_8)).append("&");
-        }
-
-        // Lưu thông tin đơn hàng vào database
-        return paymentUrl + "?" + queryString;
-    }
-
     private String getSignature(Map<String, String> params) throws Exception {
         StringBuilder sb = new StringBuilder();
         params.entrySet().stream()

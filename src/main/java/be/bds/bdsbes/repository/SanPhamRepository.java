@@ -11,10 +11,12 @@ import org.springframework.transaction.annotation.Transactional;
 
 public interface SanPhamRepository extends JpaRepository<SanPham, Long> {
 
-    @Query("select new be.bds.bdsbes.payload.SanPhamResponse(s.id, s.ma, s.ten, s.hang.id, s.hang.ten, s.chatLieu.id, s.chatLieu.ten, s.trangThai, s.imageDefault) from SanPham s")
+    @Query("select new be.bds.bdsbes.payload.SanPhamResponse(s.id, s.ma, s.ten, s.hang.id, s.hang.ten, s.chatLieu.id, s.chatLieu.ten, s.trangThai, s.imageDefault, s.qrCode, min(ctsp.giaBan), max (ctsp.giaBan)) from SanPham s left join ChiTietSanPham ctsp on s.id = ctsp.sanPham.id group by " +
+            "s.id, s.ma, s.ten, s.hang.id, s.hang.ten, s.chatLieu.id, s.chatLieu.ten, s.trangThai, s.imageDefault, s.qrCode")
     Page<SanPhamResponse> getAll(Pageable pageable);
 
-    @Query("select new be.bds.bdsbes.payload.SanPhamResponse(s.id, s.ma, s.ten, s.hang.id, s.hang.ten, s.chatLieu.id, s.chatLieu.ten, s.trangThai, s.imageDefault) from SanPham s where s.id =:id")
+    @Query("select new be.bds.bdsbes.payload.SanPhamResponse(s.id, s.ma, s.ten, s.hang.id, s.hang.ten, s.chatLieu.id, s.chatLieu.ten, s.trangThai, s.imageDefault, s.qrCode, min(ctsp.giaBan), max (ctsp.giaBan)) from SanPham s left join ChiTietSanPham ctsp on s.id = ctsp.sanPham.id where s.id =:id group by " +
+            "s.id, s.ma, s.ten, s.hang.id, s.hang.ten, s.chatLieu.id, s.chatLieu.ten, s.trangThai, s.imageDefault, s.qrCode")
     SanPhamResponse getOneById(Long id);
 
     @Transactional

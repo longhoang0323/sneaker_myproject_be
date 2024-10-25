@@ -19,7 +19,7 @@ public class HoaDonResponse {
 
     private String ma;
 
-    private LocalDateTime ngayTao;;
+    private LocalDateTime ngayTao;
 
     private LocalDateTime ngayThanhToan;
 
@@ -45,6 +45,10 @@ public class HoaDonResponse {
 
     private BigDecimal tongThanhToan;
 
+    private BigDecimal tienMat;
+
+    private BigDecimal chuyenKhoan;
+
     private Integer trangThai;
 
     private String ghiChu;
@@ -56,4 +60,10 @@ public class HoaDonResponse {
     private Long idUser;
 
     private String userEmail;
+
+    private Long idVoucher;
+
+    private String maVoucher;
+
+    private BigDecimal giaTriVoucher;
 }

@@ -23,34 +23,6 @@ public class PaymentController {
     @Autowired
     private PaymentService paymentService;
 
-    @GetMapping("/pay")
-    public String pay(@RequestParam("amount") String amount, HttpServletResponse response) throws Exception {
-        long amountReturn = Integer.parseInt(amount) * 100L;
-        return paymentService.createPaymentUrl(amountReturn);
-    }
-
-//    @GetMapping("/pay")
-//    public String createPayment(@RequestParam("amount") int amount) {
-//        String amountReturn = String.valueOf((amount * 100L));
-//        return paymentService.createPaymentRequest(amountReturn);
-//    }
-
-    @GetMapping("/return")
-    public String returnUrl(@RequestParam Map<String, String> params) {
-        // Kiểm tra mã kết quả trả về từ VNPAY
-        String vnpResponseCode = params.get("vnp_ResponseCode");
-        String orderId = params.get("vnp_OrderId");
-
-        // Kiểm tra xem mã kết quả có thành công không
-        if ("00".equals(vnpResponseCode)) {
-            // Lấy thông tin chi tiết từ cơ sở dữ liệu
-            return "Thanh toán thành công! Mã đơn hàng: LONGDEPTRAI" + orderId;
-        } else {
-            // Cập nhật trạng thái đơn hàng thành công
-            return "Thanh toán thất bại! Mã kết quả: " + vnpResponseCode;
-        }
-    }
-
     //cách 2
     @GetMapping("/vn-pay")
     public ResponseEntity<?> pay(HttpServletRequest request) {

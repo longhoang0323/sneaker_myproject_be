@@ -1,7 +1,6 @@
 package be.bds.bdsbes.resource;
 
 import be.bds.bdsbes.service.dto.HoaDonDTO;
-import be.bds.bdsbes.service.dto.SanPhamDTO;
 import be.bds.bdsbes.service.iService.IHoaDonService;
 import be.bds.bdsbes.utils.AppConstantsUtil;
 import be.bds.bdsbes.utils.ResponseUtil;
@@ -42,5 +41,17 @@ public class HoaDonController {
     public ResponseEntity<?> createNewBill(
             @RequestBody @Valid HoaDonDTO hoaDonDTO, BindingResult bindingResult) {
         return ResponseEntity.ok(iHoaDonService.createTaiQuay(hoaDonDTO));
+    }
+
+    @PostMapping("create-bill-online")
+    public ResponseEntity<?> createBillOnline(
+            @RequestBody @Valid HoaDonDTO hoaDonDTO, BindingResult bindingResult) {
+        return ResponseEntity.ok(iHoaDonService.datHangOnline(hoaDonDTO));
+    }
+
+    @PutMapping("thanh-toan-tai-quay")
+    public ResponseEntity<?> thanhToanTaiQuay(@RequestParam(value = "id") Long id,
+                                              @RequestBody @Valid HoaDonDTO hoaDonDTO, BindingResult bindingResult) {
+        return ResponseEntity.ok(iHoaDonService.thanhToanHoaDon(id, hoaDonDTO));
     }
 }

@@ -46,6 +46,10 @@ public class HoaDonDTO {
 
     private BigDecimal tongThanhToan;
 
+    private BigDecimal tienMat;
+
+    private BigDecimal chuyenKhoan;
+
     private Integer trangThai;
 
     private String ghiChu;
@@ -53,4 +57,6 @@ public class HoaDonDTO {
     private Long idKhachHang;
 
     private Long idUser;
+
+    private Long idVoucher;
 }

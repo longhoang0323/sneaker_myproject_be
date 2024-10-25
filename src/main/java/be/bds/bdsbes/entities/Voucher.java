@@ -62,4 +62,7 @@ public class Voucher {
     @Column(name = COLUMN_SOLUONG_NAME)
     private Integer soLuong;
 
+    @Column(name = "dieu_kien")
+    private  BigDecimal dieuKien;
+
 }

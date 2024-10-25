@@ -11,13 +11,13 @@ public interface HoaDonRepository extends JpaRepository<HoaDon, Long> {
 
     @Query("select new be.bds.bdsbes.payload.HoaDonResponse(h.id, h.ma, h.ngayTao, h.ngayThanhToan, h.hinhThucGiaoHang, " +
             "h.hinhThucThanhToan, h.tenNguoiNhan, h.sdtNguoiNhan, h.tenNguoiShip, h.sdtNguoiShip, h.diaChi, h.tongTien, " +
-            "h.tienShip, h.tienGiamGia, h.tongThanhToan, h.trangThai, h.ghiChu, k.id, k.hoTen, u.id, u.email) from HoaDon h left join KhachHang k on h.khachHang.id = k.id " +
-            "left join User u on h.user.id = u.id")
+            "h.tienShip, h.tienGiamGia, h.tongThanhToan, h.tienMat, h.chuyenKhoan, h.trangThai, h.ghiChu, k.id, k.hoTen, u.id, u.email, v.id, v.ma, v.giamGia) from HoaDon h left join KhachHang k on h.khachHang.id = k.id " +
+            "left join User u on h.user.id = u.id left join Voucher v on h.voucher.id = v.id")
     Page<HoaDonResponse> getAll(Pageable pageable);
 
     @Query("select new be.bds.bdsbes.payload.HoaDonResponse(h.id, h.ma, h.ngayTao, h.ngayThanhToan, h.hinhThucGiaoHang, " +
             "h.hinhThucThanhToan, h.tenNguoiNhan, h.sdtNguoiNhan, h.tenNguoiShip, h.sdtNguoiShip, h.diaChi, h.tongTien, " +
-            "h.tienShip, h.tienGiamGia, h.tongThanhToan, h.trangThai, h.ghiChu, k.id, k.hoTen, u.id, u.email) from HoaDon h left join KhachHang k on h.khachHang.id = k.id " +
-            "left join User u on h.user.id = u.id where h.id = :id")
+            "h.tienShip, h.tienGiamGia, h.tongThanhToan, h.tienMat, h.chuyenKhoan, h.trangThai, h.ghiChu, k.id, k.hoTen, u.id, u.email, v.id, v.ma, v.giamGia) from HoaDon h left join KhachHang k on h.khachHang.id = k.id " +
+            "left join User u on h.user.id = u.id left join Voucher v on h.voucher.id = v.id where h.id = :id")
     HoaDonResponse getOneById(Long id);
 }

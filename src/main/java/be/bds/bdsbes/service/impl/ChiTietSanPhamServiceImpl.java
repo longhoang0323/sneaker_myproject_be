@@ -105,6 +105,7 @@ public class ChiTietSanPhamServiceImpl implements IChiTietSanPhamService {
             chiTietSanPham.setMauSac(MauSac.builder().id(chiTietSanPhamDTO.getIdMauSac()).build());
             chiTietSanPham.setKichThuoc(KichThuoc.builder().id(chiTietSanPhamDTO.getIdKichThuoc()).build());
             chiTietSanPham.setDonGia(chiTietSanPhamDTO.getDonGia());
+            chiTietSanPham.setGiaBan(chiTietSanPhamDTO.getGiaBan());
             chiTietSanPham.setSoLuong(chiTietSanPhamDTO.getSoLuong());
             chiTietSanPham.setGhiChu(chiTietSanPhamDTO.getGhiChu());
             chiTietSanPham.setImage(chiTietSanPhamDTO.getImage());
@@ -123,4 +124,31 @@ public class ChiTietSanPhamServiceImpl implements IChiTietSanPhamService {
         this.chiTietSanPhamRepository.updateTrangThaiById(trangThai, id);
         return 1;
     }
+
+    @Override
+    public ChiTietSanPhamResponse getByColorAndSize(Long idMauSac, Long idKichThuoc, Long idSanPham) throws ServiceException {
+        ChiTietSanPhamResponse chiTietSanPhamResponse = chiTietSanPhamRepository.getCTSPByColorAndSize(idMauSac, idKichThuoc, idSanPham);
+        System.out.println(chiTietSanPhamResponse);
+        if(chiTietSanPhamResponse == null){
+            throw ServiceExceptionBuilderUtil.newBuilder()
+                    .addError(new ValidationErrorResponse("checkIdChiTietSanPham", ValidationErrorUtil.checkIdChiTietSanPham))
+                    .build();
+        }
+        return chiTietSanPhamResponse;
+    }
+
+    @Override
+    public PagedResponse<ChiTietSanPhamResponse> getAllBySanPhamAndColor(int page, int size, Long id, Long idMauSac) {
+        Pageable pageable = PageRequest.of((page - 1), size, Sort.Direction.DESC, "id");
+        Page<ChiTietSanPhamResponse> entities = chiTietSanPhamRepository.getAllBySPAndColor(pageable, id, idMauSac);
+        List<ChiTietSanPhamResponse> dtos = entities.toList();
+        return new PagedResponse<>(
+                dtos,
+                page,
+                size,
+                entities.getTotalElements(),
+                entities.getTotalPages(),
+                entities.isLast(),
+                entities.getSort().toString()
+        );    }
 }

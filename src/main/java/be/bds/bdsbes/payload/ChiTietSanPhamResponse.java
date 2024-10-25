@@ -23,6 +23,8 @@ public class ChiTietSanPhamResponse {
 
     private Long idMauSac;
 
+    private String maMauSac;
+
     private String tenMauSac;
 
     private Long idKichThuoc;
@@ -30,6 +32,8 @@ public class ChiTietSanPhamResponse {
     private String tenKichThuoc;
 
     private BigDecimal donGia;
+
+    private BigDecimal giaBan;
 
     private int soLuong;
 

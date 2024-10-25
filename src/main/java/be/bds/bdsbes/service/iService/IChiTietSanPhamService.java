@@ -19,4 +19,9 @@ public interface IChiTietSanPhamService {
     ChiTietSanPhamResponse get(Long id);
 
     int updateTrangThai(Long id, int trangThai);
+
+    ChiTietSanPhamResponse getByColorAndSize(Long idMauSac, Long idKichThuoc, Long idSanPham) throws ServiceException;
+
+    PagedResponse<ChiTietSanPhamResponse> getAllBySanPhamAndColor(int page, int size, Long id, Long idMauSac);
+
 }

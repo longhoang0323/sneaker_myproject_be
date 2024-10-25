@@ -9,7 +9,11 @@ public interface IHoaDonChiTietService {
 
     PagedResponse<HoaDonChiTietResponse> getAll(int page, int size);
 
+    PagedResponse<HoaDonChiTietResponse> getAllByIdHoaDon(int page, int size, Long idHoaDon);
+
     HoaDonChiTiet create(HoaDonChiTietDTO hoaDonChiTietDTO);
+
+    HoaDonChiTiet createOnline(HoaDonChiTietDTO hoaDonChiTietDTO);
 
     HoaDonChiTietResponse get(Long id);
 }

@@ -24,6 +24,8 @@ public class ChiTietSanPhamDTO {
 
     private BigDecimal donGia;
 
+    private BigDecimal giaBan;
+
     private int soLuong;
 
     private String ghiChu;
@@ -37,6 +39,7 @@ public class ChiTietSanPhamDTO {
         chiTietSanPham.setMauSac(MauSac.builder().id(this.getIdMauSac()).build());
         chiTietSanPham.setKichThuoc(KichThuoc.builder().id(this.getIdKichThuoc()).build());
         chiTietSanPham.setDonGia(this.getDonGia());
+        chiTietSanPham.setGiaBan(this.getDonGia());
         chiTietSanPham.setSoLuong(this.getSoLuong());
         chiTietSanPham.setGhiChu(this.getGhiChu());
         chiTietSanPham.setTrangThai(0);
