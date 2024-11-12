@@ -76,6 +76,7 @@ public class HoaDonController {
     @PutMapping("update-giao-hang")
     public ResponseEntity<?> updateTrangThaiGiaoHang(@RequestParam(value = "id") Long id,
                                               @RequestBody @Valid HoaDonDTO hoaDonDTO, BindingResult bindingResult) {
+        System.out.println("Giao hàng thành công!");
         return ResponseEntity.ok(iHoaDonService.updateTrangThaiGiaoHang(id, hoaDonDTO));
     }
 }
