@@ -151,4 +151,9 @@ public class ChiTietSanPhamServiceImpl implements IChiTietSanPhamService {
                 entities.isLast(),
                 entities.getSort().toString()
         );    }
+
+    @Override
+    public ChiTietSanPhamResponse getByMaCTSP(String ma) {
+        return chiTietSanPhamRepository.getCTSPByMaCTSP(ma);
+    }
 }

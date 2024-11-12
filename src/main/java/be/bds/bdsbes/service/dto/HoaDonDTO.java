@@ -59,4 +59,9 @@ public class HoaDonDTO {
     private Long idUser;
 
     private Long idVoucher;
+
+    private Integer loaiHoaDon;
+
+    private Integer trangThaiGiaoHang;
+
 }

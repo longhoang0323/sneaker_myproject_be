@@ -32,6 +32,19 @@ public class HoaDonController {
         }
     }
 
+    @GetMapping("list-by-loai-hd")
+    public ResponseEntity<?> getListByLoaiHD(
+            @RequestParam(value = "page", defaultValue = AppConstantsUtil.DEFAULT_PAGE_NUMBER) int page,
+            @RequestParam(value = "size", defaultValue = AppConstantsUtil.DEFAULT_PAGE_SIZE) int size,
+            @RequestParam(value = "loaiHoaDon") int loaiHoaDon) {
+        try {
+            return ResponseUtil.wrap(this.iHoaDonService.getAllByLoaiHoaDon(page, size, loaiHoaDon));
+        } catch (Exception ex) {
+            log.error(this.getClass().getName(), ex);
+            return ResponseUtil.generateErrorResponse(ex);
+        }
+    }
+
     @GetMapping("detail")
     public ResponseEntity<?> details(@RequestParam(value = "id") Long id) {
         return ResponseEntity.ok(iHoaDonService.get(id));
@@ -53,5 +66,16 @@ public class HoaDonController {
     public ResponseEntity<?> thanhToanTaiQuay(@RequestParam(value = "id") Long id,
                                               @RequestBody @Valid HoaDonDTO hoaDonDTO, BindingResult bindingResult) {
         return ResponseEntity.ok(iHoaDonService.thanhToanHoaDon(id, hoaDonDTO));
+    }
+
+    @GetMapping("get-by-ma")
+    public ResponseEntity<?> getOneByMa(@RequestParam(value = "ma") String ma) {
+        return ResponseEntity.ok(iHoaDonService.getOneByMa(ma));
+    }
+
+    @PutMapping("update-giao-hang")
+    public ResponseEntity<?> updateTrangThaiGiaoHang(@RequestParam(value = "id") Long id,
+                                              @RequestBody @Valid HoaDonDTO hoaDonDTO, BindingResult bindingResult) {
+        return ResponseEntity.ok(iHoaDonService.updateTrangThaiGiaoHang(id, hoaDonDTO));
     }
 }
