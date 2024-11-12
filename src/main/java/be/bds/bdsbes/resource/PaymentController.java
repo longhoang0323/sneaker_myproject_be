@@ -1,5 +1,6 @@
 package be.bds.bdsbes.resource;
 
+import be.bds.bdsbes.service.iService.IHoaDonService;
 import be.bds.bdsbes.service.impl.PaymentService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -23,16 +24,23 @@ public class PaymentController {
     @Autowired
     private PaymentService paymentService;
 
+    @Autowired
+    IHoaDonService iHoaDonService;
+
     //cách 2
     @GetMapping("/vn-pay")
-    public ResponseEntity<?> pay(HttpServletRequest request) {
-        return ResponseEntity.ok(paymentService.createVnPayPayment(request));
+    public ResponseEntity<?> pay(HttpServletRequest request,
+                                 @RequestParam(value = "maHD") String maHD) {
+        return ResponseEntity.ok(paymentService.createVnPayPayment(request, maHD));
     }
 
     @GetMapping("/vn-pay-callback")
-    public String payCallbackHandler(HttpServletRequest request) {
+    public String payCallbackHandler(HttpServletRequest request,
+                                     @RequestParam(value = "id") Long id) {
         String status = request.getParameter("vnp_ResponseCode");
         if (status.equals("00")) {
+            System.out.println("Thanh toán thành công");
+            this.iHoaDonService.updateTrangThaiThanhToan(id);
             return new PaymentDTO.VNPayResponse("00", "Success", "").toString();
         } else {
             return "Faled";

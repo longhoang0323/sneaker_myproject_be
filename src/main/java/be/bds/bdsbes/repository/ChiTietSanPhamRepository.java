@@ -36,4 +36,8 @@ public interface ChiTietSanPhamRepository extends JpaRepository<ChiTietSanPham, 
     @Query("select new be.bds.bdsbes.payload.ChiTietSanPhamResponse" +
             "(ct.id, ct.ma, ct.sanPham.id, ct.sanPham.ten, ct.mauSac.id, ct.mauSac.ma, ct.mauSac.ten, ct.kichThuoc.id, ct.kichThuoc.ten, ct.donGia, ct.giaBan, ct.soLuong, ct.ghiChu, ct.trangThai, ct.image) from ChiTietSanPham ct where ct.sanPham.id = :id and ct.mauSac.id = :idMauSac")
     Page<ChiTietSanPhamResponse> getAllBySPAndColor(Pageable pageable, Long id, Long idMauSac);
+
+    @Query("select new be.bds.bdsbes.payload.ChiTietSanPhamResponse" +
+            "(ct.id, ct.ma, ct.sanPham.id, ct.sanPham.ten, ct.mauSac.id, ct.mauSac.ma, ct.mauSac.ten, ct.kichThuoc.id, ct.kichThuoc.ten, ct.donGia, ct.giaBan, ct.soLuong, ct.ghiChu, ct.trangThai, ct.image) from ChiTietSanPham ct where ct.ma = :ma")
+    ChiTietSanPhamResponse getCTSPByMaCTSP(String ma);
 }

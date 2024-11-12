@@ -100,4 +100,9 @@ public class ChiTietSanPhamController {
             return ResponseUtil.generateErrorResponse(ex);
         }
     }
+
+    @GetMapping("get-one-by-ma")
+    public ResponseEntity<?> getOneByMa(@RequestParam(value = "ma") String ma) {
+        return ResponseEntity.ok(iChiTietSanPhamService.getByMaCTSP(ma));
+    }
 }

@@ -9,6 +9,8 @@ public interface IHoaDonService {
 
     PagedResponse<HoaDonResponse> getAll(int page, int size);
 
+    PagedResponse<HoaDonResponse> getAllByLoaiHoaDon(int page, int size, Integer loaiHoaDon);
+
     HoaDon createTaiQuay(HoaDonDTO hoaDonDTO);
 
     HoaDon datHangOnline(HoaDonDTO hoaDonDTO);
@@ -16,4 +18,11 @@ public interface IHoaDonService {
     HoaDonResponse thanhToanHoaDon(Long id, HoaDonDTO hoaDonDTO);
 
     HoaDonResponse get(Long id);
+
+    HoaDonResponse getOneByMa(String ma);
+
+    Integer updateTrangThaiThanhToan(Long id);
+
+
+    Integer updateTrangThaiGiaoHang(Long id, HoaDonDTO hoaDonDTO);
 }

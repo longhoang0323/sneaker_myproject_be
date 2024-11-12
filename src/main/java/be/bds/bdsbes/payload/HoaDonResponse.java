@@ -66,4 +66,9 @@ public class HoaDonResponse {
     private String maVoucher;
 
     private BigDecimal giaTriVoucher;
+
+    private Integer loaiHoaDon;
+
+    private Integer trangThaiGiaoHang;
+
 }

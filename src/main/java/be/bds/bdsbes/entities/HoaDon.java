@@ -92,10 +92,16 @@ public class HoaDon {
     @Column(name = COLUMN_TRANGTHAI_NAME)
     private Integer trangThai;
 
+    @Column(name = "trang_thai_giao_hang")
+    private Integer trangThaiGiaoHang;
+
     @Nationalized
     @Lob
     @Column(name = COLUMN_GHICHU_NAME)
     private String ghiChu;
+
+    @Column(name = "loai_hoa_don")
+    private Integer loaiHoaDon;
 
     @ManyToOne(cascade = CascadeType.MERGE)
     @JoinColumn(name = "id_voucher")

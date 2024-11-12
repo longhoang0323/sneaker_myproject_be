@@ -1,6 +1,8 @@
 package be.bds.bdsbes.config;
 
+import be.bds.bdsbes.repository.HoaDonRepository;
 import lombok.Getter;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Configuration;
 
@@ -15,7 +17,7 @@ public class VNPAYConfig {
     @Getter
     @Value("https://sandbox.vnpayment.vn/paymentv2/vpcpay.html")
     private String vnp_PayUrl;
-    @Value("http://localhost:4200/product")
+    @Value("http://localhost:4200/pay-ment-success")
     private String vnp_ReturnUrl;
     @Value("D6F170M5")
     private String vnp_TmnCode ;
@@ -29,14 +31,17 @@ public class VNPAYConfig {
     @Value("other")
     private String orderType;
 
-    public Map<String, String> getVNPayConfig() {
+    @Autowired
+    private HoaDonRepository hoaDonRepository;
+
+    public Map<String, String> getVNPayConfig(String maHD) {
         Map<String, String> vnpParamsMap = new HashMap<>();
         vnpParamsMap.put("vnp_Version", this.vnp_Version);
         vnpParamsMap.put("vnp_Command", this.vnp_Command);
         vnpParamsMap.put("vnp_TmnCode", this.vnp_TmnCode);
         vnpParamsMap.put("vnp_CurrCode", "VND");
         vnpParamsMap.put("vnp_TxnRef",  VNPayUtil.getRandomNumber(8));
-        vnpParamsMap.put("vnp_OrderInfo", "Thanh toan don hang:" +  VNPayUtil.getRandomNumber(8));
+        vnpParamsMap.put("vnp_OrderInfo", "Thanh toan don hang:" +  maHD);
         vnpParamsMap.put("vnp_OrderType", this.orderType);
         vnpParamsMap.put("vnp_Locale", "vn");
         vnpParamsMap.put("vnp_ReturnUrl", this.vnp_ReturnUrl);

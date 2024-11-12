@@ -29,17 +29,21 @@ public class VoucherDto implements Serializable {
     Integer trangThai;
     @NotNull(message = "Không thể để trống trường này")
     Integer soLuong;
+    Integer loaiGiamGia;
+    BigDecimal dieuKien;
 
 
     public Voucher dtoVoucher(Voucher voucher){
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
         voucher.setMa(this.getMa());
         voucher.setMoTa(this.getMoTa());
+        voucher.setLoaiGiamGia(this.getLoaiGiamGia());
         voucher.setGiamGia(this.getGiamGia());
         voucher.setNgayBatDau(this.getNgayBatDau());
         voucher.setNgayKetThuc(this.getNgayKetThuc());
         voucher.setTrangThai(this.getTrangThai());
         voucher.setSoLuong(this.getSoLuong());
+        voucher.setDieuKien(this.getDieuKien());
         return voucher;
     }
 }

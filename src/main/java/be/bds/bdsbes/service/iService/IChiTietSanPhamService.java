@@ -24,4 +24,6 @@ public interface IChiTietSanPhamService {
 
     PagedResponse<ChiTietSanPhamResponse> getAllBySanPhamAndColor(int page, int size, Long id, Long idMauSac);
 
+    ChiTietSanPhamResponse getByMaCTSP(String ma);
+
 }
