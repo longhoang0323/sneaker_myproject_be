@@ -16,6 +16,8 @@ public interface IKhachHangService {
 
     KhachHangResponse1 getOne(Long id);
 
+    KhachHangResponse1 getKhachBanLe(int trangThai);
+
     KhachHang create(KhachHangDTO khachHangDTO);
 
     KhachHang update(KhachHangDTO khachHangDTO, Long id);

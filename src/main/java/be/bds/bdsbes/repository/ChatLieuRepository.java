@@ -6,7 +6,9 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
+import org.springframework.stereotype.Repository;
 
+@Repository
 public interface ChatLieuRepository extends JpaRepository<ChatLieu, Long> {
 
     @Query("select new be.bds.bdsbes.payload.ChatLieuResponse(c.id, c.ma, c.ten, c.trangThai) from ChatLieu c")

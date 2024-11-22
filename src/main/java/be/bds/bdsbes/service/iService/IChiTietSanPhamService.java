@@ -26,4 +26,6 @@ public interface IChiTietSanPhamService {
 
     ChiTietSanPhamResponse getByMaCTSP(String ma);
 
+    int updateSoLuong(Long id, int soLuong);
+
 }

@@ -38,4 +38,6 @@ public class KhachHangKhuyenMaiResponse {
 
     private Integer trangThai;
 
+    private Integer trangThaiVoucher;
+
 }

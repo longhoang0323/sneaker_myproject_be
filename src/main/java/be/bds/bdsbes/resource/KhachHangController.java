@@ -42,6 +42,12 @@ public class KhachHangController {
         return ResponseEntity.ok(khachHangService.getOne(id));
     }
 
+    @GetMapping("khach-ban-le")
+    public ResponseEntity<?> getKhachBanLe(@RequestParam(value = "trangThai") int trangThai){
+        return ResponseEntity.ok(khachHangService.getKhachBanLe(trangThai));
+    }
+
+
 
     @PutMapping("update")
     public ResponseEntity<?> update(@RequestParam(value = "id") Long id, @RequestBody @Valid KhachHangDTO khachHangDTO, BindingResult result){

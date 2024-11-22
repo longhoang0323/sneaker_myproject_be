@@ -16,6 +16,8 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
+import java.math.BigDecimal;
+import java.util.ArrayList;
 import java.util.List;
 
 
@@ -45,6 +47,38 @@ public class SanPhamServiceImpl implements ISanPhamService {
         Pageable pageable = PageRequest.of((page - 1), size, Sort.Direction.DESC, "id");
         Page<SanPhamResponse> entities = sanPhamRepository.getAll(pageable);
         List<SanPhamResponse> dtos = entities.toList();
+        return new PagedResponse<>(
+                dtos,
+                page,
+                size,
+                entities.getTotalElements(),
+                entities.getTotalPages(),
+                entities.isLast(),
+                entities.getSort().toString()
+        );
+    }
+
+    @Override
+    public PagedResponse<SanPhamResponse> getAllBySearch(int page, int size, Long idHang, Long idChatLieu, BigDecimal gia, String searchInput) {
+        Pageable pageable = PageRequest.of((page - 1), size, Sort.Direction.DESC, "id");
+        Page<SanPhamResponse> entities = sanPhamRepository.getAll(pageable);
+        List<SanPhamResponse> dtos = new ArrayList<>();
+        if(idHang != 0 && idChatLieu == 0 && Double.parseDouble(String.valueOf(gia)) <=0){
+            entities = sanPhamRepository.getAllByHang(pageable, idHang);
+            dtos = entities.toList();
+        }
+        if(idHang == 0 && idChatLieu != 0 && Double.parseDouble(String.valueOf(gia)) <=0){
+            entities = sanPhamRepository.getAllByChatLieu(pageable, idChatLieu);
+            dtos = entities.toList();
+        }
+        if(idHang != 0 && idChatLieu != 0 && Double.parseDouble(String.valueOf(gia)) <=0){
+            entities = sanPhamRepository.getAllByHangAndChatLieu(pageable, idHang, idChatLieu);
+            dtos = entities.toList();
+        }
+        if(idHang == 0 && idChatLieu == 0 && Double.parseDouble(String.valueOf(gia)) <=0){
+            entities = sanPhamRepository.getAllBySearchString(pageable, searchInput);
+            dtos = entities.toList();
+        }
         return new PagedResponse<>(
                 dtos,
                 page,

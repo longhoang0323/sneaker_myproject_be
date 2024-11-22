@@ -5,9 +5,13 @@ import be.bds.bdsbes.payload.SanPhamResponse;
 import be.bds.bdsbes.service.dto.SanPhamDTO;
 import be.bds.bdsbes.utils.dto.PagedResponse;
 
+import java.math.BigDecimal;
+
 public interface ISanPhamService {
 
     PagedResponse<SanPhamResponse> getAll(int page, int size);
+
+    PagedResponse<SanPhamResponse> getAllBySearch(int page, int size, Long idHang, Long idChatLieu, BigDecimal gia, String searchInput);
 
     SanPham create(SanPhamDTO sanPhamDTO);
 

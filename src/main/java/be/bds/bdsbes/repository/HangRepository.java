@@ -6,7 +6,9 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
+import org.springframework.stereotype.Repository;
 
+@Repository
 public interface HangRepository extends JpaRepository<Hang, Long> {
 
     @Query("select new be.bds.bdsbes.payload.HangResponse(h.id, h.ma, h.ten, h.trangThai) from Hang h")

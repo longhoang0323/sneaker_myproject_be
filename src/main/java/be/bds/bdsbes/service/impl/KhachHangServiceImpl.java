@@ -60,6 +60,11 @@ public class KhachHangServiceImpl implements IKhachHangService {
     }
 
     @Override
+    public KhachHangResponse1 getKhachBanLe(int trangThai) {
+        return khachHangRepository.getKhachBanLe(trangThai);
+    }
+
+    @Override
     public KhachHang create(KhachHangDTO khachHangDTO) {
         Random random = new Random();
         int min = 1;
