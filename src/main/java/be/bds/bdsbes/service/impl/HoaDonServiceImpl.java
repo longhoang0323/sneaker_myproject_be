@@ -7,6 +7,7 @@ import be.bds.bdsbes.entities.Voucher;
 import be.bds.bdsbes.payload.HangResponse;
 import be.bds.bdsbes.payload.HoaDonResponse;
 import be.bds.bdsbes.repository.HoaDonRepository;
+import be.bds.bdsbes.repository.KhachHangRepository;
 import be.bds.bdsbes.service.dto.HoaDonDTO;
 import be.bds.bdsbes.service.iService.IHoaDonService;
 import be.bds.bdsbes.utils.dto.PagedResponse;
@@ -29,6 +30,9 @@ public class HoaDonServiceImpl implements IHoaDonService {
 
     @Autowired
     private HoaDonRepository hoaDonRepository;
+
+    @Autowired
+    private KhachHangRepository khachHangRepository;
 
     @Override
     public PagedResponse<HoaDonResponse> getAll(int page, int size) {
@@ -105,12 +109,15 @@ public class HoaDonServiceImpl implements IHoaDonService {
         hoaDon.setTrangThai(0);
         hoaDon.setTrangThaiGiaoHang(0);
         hoaDon.setLoaiHoaDon(1);
-        hoaDon.setVoucher(Voucher.builder().id(hoaDonDTO.getIdVoucher()).build());
+        if(hoaDonDTO.getIdVoucher() != null){
+            hoaDon.setVoucher(Voucher.builder().id(hoaDonDTO.getIdVoucher()).build());
+        }
         return hoaDonRepository.save(hoaDon);
     }
 
     @Override
     public HoaDonResponse thanhToanHoaDon(Long id, HoaDonDTO hoaDonDTO) {
+        KhachHang khachHang = khachHangRepository.findById(hoaDonDTO.getIdKhachHang()).get();
         HoaDon hoaDon = hoaDonRepository.findById(id).get();
         hoaDon.setNgayThanhToan(LocalDateTime.now());
         hoaDon.setHinhThucGiaoHang(hoaDonDTO.getHinhThucGiaoHang());
@@ -125,6 +132,7 @@ public class HoaDonServiceImpl implements IHoaDonService {
         hoaDon.setTienMat(hoaDonDTO.getTienMat());
         hoaDon.setChuyenKhoan(hoaDonDTO.getChuyenKhoan());
         hoaDon.setDiaChi(hoaDonDTO.getDiaChi());
+        hoaDon.setKhachHang(khachHang);
         hoaDon.setTrangThai(hoaDonDTO.getTrangThai());
         hoaDon.setGhiChu("");
         this.hoaDonRepository.save(hoaDon);
@@ -162,7 +170,7 @@ public class HoaDonServiceImpl implements IHoaDonService {
         Optional<HoaDon> hoaDonOptional = hoaDonRepository.findById(id);
         if(hoaDonOptional.isPresent()){
             HoaDon hoaDon = hoaDonOptional.get();
-            hoaDon.setTrangThaiGiaoHang(1);
+            hoaDon.setTrangThaiGiaoHang(hoaDonDTO.getTrangThaiGiaoHang());
             hoaDon.setTenNguoiShip(hoaDonDTO.getTenNguoiShip());
             hoaDon.setSdtNguoiShip(hoaDonDTO.getSdtNguoiShip());
             hoaDonRepository.save(hoaDon);

@@ -13,7 +13,7 @@ import org.springframework.stereotype.Repository;
 public interface KhachHangKhuyenMaiRepository extends JpaRepository<KhachHangKhuyenMai, Long> {
 
     @Query("select new be.bds.bdsbes.payload.KhachHangKhuyenMaiResponse(khkm.id, khkm.khachHang.id, khkm.khachHang.hoTen, khkm.voucher.id, " +
-            "khkm.voucher.ma, khkm.voucher.moTa, khkm.voucher.giamGia, khkm.voucher.dieuKien, khkm.voucher.ngayBatDau, khkm.voucher.ngayKetThuc, khkm.voucher.loaiGiamGia, khkm.trangThai) from KhachHangKhuyenMai khkm " +
+            "khkm.voucher.ma, khkm.voucher.moTa, khkm.voucher.giamGia, khkm.voucher.dieuKien, khkm.voucher.ngayBatDau, khkm.voucher.ngayKetThuc, khkm.voucher.loaiGiamGia, khkm.trangThai, khkm.voucher.trangThai) from KhachHangKhuyenMai khkm " +
             "where khkm.khachHang.id = :idKhachHang and khkm.trangThai = 1")
     Page<KhachHangKhuyenMaiResponse> getAllByIdKhachHang(Pageable pageable, Long idKhachHang);
 }

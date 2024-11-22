@@ -33,4 +33,6 @@ public class KhachHangResponse1 {
 
     private Date thoiHan;
 
+    private int trangThai;
+
 }

@@ -11,6 +11,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.math.BigDecimal;
 
 @Slf4j
 @RestController
@@ -26,6 +27,22 @@ public class SanPhamController {
             @RequestParam(value = "size", defaultValue = AppConstantsUtil.DEFAULT_PAGE_SIZE) int size) {
         try {
             return ResponseUtil.wrap(this.iSanPhamService.getAll(page, size));
+        } catch (Exception ex) {
+            log.error(this.getClass().getName(), ex);
+            return ResponseUtil.generateErrorResponse(ex);
+        }
+    }
+
+    @GetMapping("list-by-search")
+    public ResponseEntity<?> getListBySearch(
+            @RequestParam(value = "page", defaultValue = AppConstantsUtil.DEFAULT_PAGE_NUMBER) int page,
+            @RequestParam(value = "size", defaultValue = AppConstantsUtil.DEFAULT_PAGE_SIZE) int size,
+            @RequestParam(value = "idHang") Long idHang,
+            @RequestParam(value = "idChatLieu") Long idChatLieu,
+            @RequestParam(value = "gia") BigDecimal gia,
+            @RequestParam(value = "searchInput") String searchInput) {
+        try {
+            return ResponseUtil.wrap(this.iSanPhamService.getAllBySearch(page, size, idHang, idChatLieu, gia, searchInput));
         } catch (Exception ex) {
             log.error(this.getClass().getName(), ex);
             return ResponseUtil.generateErrorResponse(ex);

@@ -73,9 +73,9 @@ public class HoaDonChiTietServiceImpl implements IHoaDonChiTietService {
         hoaDonChiTiet.setGiamGia(hoaDonChiTietDTO.getGiamGia());
         hoaDonChiTiet.setTrangThai(0);
         HoaDon hoaDon = hoaDonRepository.findById(hoaDonChiTietDTO.getIdHoaDon()).get();
-        if(hoaDon.getTongTien() == null){
+        if(hoaDon.getTongTien() == null && hoaDon.getLoaiHoaDon() == 0){
             hoaDon.setTongTien(hoaDonChiTietDTO.getGiaBan().multiply(BigDecimal.valueOf(hoaDonChiTietDTO.getSoLuong())));
-        }else{
+        }else if(hoaDon.getTongTien() != null && hoaDon.getLoaiHoaDon() == 0){
             hoaDon.setTongTien(hoaDon.getTongTien().add(hoaDonChiTietDTO.getGiaBan().multiply(BigDecimal.valueOf(hoaDonChiTietDTO.getSoLuong()))));
         }
         this.hoaDonRepository.save(hoaDon);

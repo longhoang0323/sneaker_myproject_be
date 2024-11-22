@@ -105,4 +105,10 @@ public class ChiTietSanPhamController {
     public ResponseEntity<?> getOneByMa(@RequestParam(value = "ma") String ma) {
         return ResponseEntity.ok(iChiTietSanPhamService.getByMaCTSP(ma));
     }
+
+    @PutMapping("update-so-luong")
+    public ResponseEntity<?> updateSoLuong(@RequestParam(value = "id") Long id,
+                                          @RequestBody int soLuong) {
+        return ResponseEntity.ok(iChiTietSanPhamService.updateSoLuong(id, soLuong));
+    }
 }

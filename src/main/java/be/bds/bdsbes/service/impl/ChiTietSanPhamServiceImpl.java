@@ -156,4 +156,9 @@ public class ChiTietSanPhamServiceImpl implements IChiTietSanPhamService {
     public ChiTietSanPhamResponse getByMaCTSP(String ma) {
         return chiTietSanPhamRepository.getCTSPByMaCTSP(ma);
     }
+
+    @Override
+    public int updateSoLuong(Long id, int soLuong) {
+        return chiTietSanPhamRepository.updateSoLuongById(soLuong, id);
+    }
 }
