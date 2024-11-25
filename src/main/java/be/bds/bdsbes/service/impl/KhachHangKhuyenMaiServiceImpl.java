@@ -27,7 +27,7 @@ public class KhachHangKhuyenMaiServiceImpl implements IKhachHangKhuyenMaiService
     KhachHangKhuyenMaiRepository khachHangKhuyenMaiRepository;
 
     @Override
-    public List<KhachHangKhuyenMai> saveAll(Long idVoucher, List<KhachHangResponse1> listKh) {
+    public List<KhachHangKhuyenMaiResponse> saveAll(Long idVoucher, List<KhachHangResponse1> listKh) {
         for(KhachHangResponse1 kh: listKh){
             KhachHangKhuyenMai khachHangKhuyenMai = new KhachHangKhuyenMai();
             khachHangKhuyenMai.setKhachHang(KhachHang.builder().id(kh.getId()).build());
@@ -35,7 +35,7 @@ public class KhachHangKhuyenMaiServiceImpl implements IKhachHangKhuyenMaiService
             khachHangKhuyenMai.setTrangThai(1);
             this.khachHangKhuyenMaiRepository.save(khachHangKhuyenMai);
         }
-        return khachHangKhuyenMaiRepository.findAll();
+        return khachHangKhuyenMaiRepository.getAll();
     }
 
     @Override
