@@ -9,6 +9,8 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
+import java.util.List;
+
 @Repository("khachHangKhuyemMaiRepository")
 public interface KhachHangKhuyenMaiRepository extends JpaRepository<KhachHangKhuyenMai, Long> {
 
@@ -16,4 +18,9 @@ public interface KhachHangKhuyenMaiRepository extends JpaRepository<KhachHangKhu
             "khkm.voucher.ma, khkm.voucher.moTa, khkm.voucher.giamGia, khkm.voucher.dieuKien, khkm.voucher.ngayBatDau, khkm.voucher.ngayKetThuc, khkm.voucher.loaiGiamGia, khkm.trangThai, khkm.voucher.trangThai) from KhachHangKhuyenMai khkm " +
             "where khkm.khachHang.id = :idKhachHang and khkm.trangThai = 1")
     Page<KhachHangKhuyenMaiResponse> getAllByIdKhachHang(Pageable pageable, Long idKhachHang);
+
+    @Query("select new be.bds.bdsbes.payload.KhachHangKhuyenMaiResponse(khkm.id, khkm.khachHang.id, khkm.khachHang.hoTen, khkm.voucher.id, " +
+            "khkm.voucher.ma, khkm.voucher.moTa, khkm.voucher.giamGia, khkm.voucher.dieuKien, khkm.voucher.ngayBatDau, khkm.voucher.ngayKetThuc, khkm.voucher.loaiGiamGia, khkm.trangThai, khkm.voucher.trangThai) from KhachHangKhuyenMai khkm " +
+            "where khkm.trangThai = 1")
+    List<KhachHangKhuyenMaiResponse> getAll();
 }

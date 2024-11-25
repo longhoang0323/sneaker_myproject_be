@@ -10,7 +10,7 @@ import java.util.List;
 
 public interface IKhachHangKhuyenMaiService {
 
-    List<KhachHangKhuyenMai> saveAll(Long idVoucher, List<KhachHangResponse1> listKh);
+    List<KhachHangKhuyenMaiResponse> saveAll(Long idVoucher, List<KhachHangResponse1> listKh);
 
     PagedResponse<KhachHangKhuyenMaiResponse> getAllByIDKhachHang(int page, int size, Long idKhachHang) throws ServiceException;
 }
