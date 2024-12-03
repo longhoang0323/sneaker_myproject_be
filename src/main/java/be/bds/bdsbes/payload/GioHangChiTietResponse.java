@@ -38,4 +38,6 @@ public class GioHangChiTietResponse {
     private BigDecimal giamGia;
 
     private Integer trangThai;
+
+    private int trangThaiChon;
 }

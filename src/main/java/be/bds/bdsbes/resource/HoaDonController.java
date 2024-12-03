@@ -32,6 +32,19 @@ public class HoaDonController {
         }
     }
 
+    @GetMapping("list-by-user")
+    public ResponseEntity<?> getListByUser(
+            @RequestParam(value = "page", defaultValue = AppConstantsUtil.DEFAULT_PAGE_NUMBER) int page,
+            @RequestParam(value = "size", defaultValue = AppConstantsUtil.DEFAULT_PAGE_SIZE) int size,
+            @RequestParam(value = "idUser") Long idUser) {
+        try {
+            return ResponseUtil.wrap(this.iHoaDonService.getAllByUser(page, size, idUser));
+        } catch (Exception ex) {
+            log.error(this.getClass().getName(), ex);
+            return ResponseUtil.generateErrorResponse(ex);
+        }
+    }
+
     @GetMapping("list-by-loai-hd")
     public ResponseEntity<?> getListByLoaiHD(
             @RequestParam(value = "page", defaultValue = AppConstantsUtil.DEFAULT_PAGE_NUMBER) int page,
@@ -39,6 +52,25 @@ public class HoaDonController {
             @RequestParam(value = "loaiHoaDon") int loaiHoaDon) {
         try {
             return ResponseUtil.wrap(this.iHoaDonService.getAllByLoaiHoaDon(page, size, loaiHoaDon));
+        } catch (Exception ex) {
+            log.error(this.getClass().getName(), ex);
+            return ResponseUtil.generateErrorResponse(ex);
+        }
+    }
+
+    @GetMapping("list-by-search")
+    public ResponseEntity<?> getListBySearchAndAll(
+            @RequestParam(value = "page", defaultValue = AppConstantsUtil.DEFAULT_PAGE_NUMBER) int page,
+            @RequestParam(value = "size", defaultValue = AppConstantsUtil.DEFAULT_PAGE_SIZE) int size,
+            @RequestParam(value = "loaiHoaDon") int loaiHoaDon,
+            @RequestParam(value = "searchInput") String searchInput,
+            @RequestParam(value = "trangThai") int trangThai,
+            @RequestParam(value = "trangThaiGiaoHang") int trangThaiGiaoHang,
+            @RequestParam(value = "hinhThucGiaoHang") int hinhThucGiaoHang,
+            @RequestParam(value = "startDate") String startDate,
+            @RequestParam(value = "endDate") String endDate) {
+        try {
+            return ResponseUtil.wrap(this.iHoaDonService.getAllBySearchAndAll(page, size, loaiHoaDon, searchInput, startDate, endDate, trangThaiGiaoHang, hinhThucGiaoHang, trangThai));
         } catch (Exception ex) {
             log.error(this.getClass().getName(), ex);
             return ResponseUtil.generateErrorResponse(ex);
@@ -78,5 +110,24 @@ public class HoaDonController {
                                               @RequestBody @Valid HoaDonDTO hoaDonDTO, BindingResult bindingResult) {
         System.out.println("Giao hàng thành công!");
         return ResponseEntity.ok(iHoaDonService.updateTrangThaiGiaoHang(id, hoaDonDTO));
+    }
+
+    @GetMapping("get-sum-by-day")
+    public ResponseEntity<?> getSumTongThanhToan(
+            @RequestParam(value = "startDate") String startDate,
+            @RequestParam(value = "endDate") String endDate,
+            @RequestParam(value = "dayInput") String dayInput
+    ) {
+        return ResponseEntity.ok(iHoaDonService.getSumTongThanhToan(startDate, endDate, dayInput));
+    }
+
+    @GetMapping("get-count-hoa-don")
+    public ResponseEntity<?> getCountHoaDon(
+            @RequestParam(value = "trangThai") Integer trangThai,
+            @RequestParam(value = "startDate") String startDate,
+            @RequestParam(value = "endDate") String endDate,
+            @RequestParam(value = "dayInput") String dayInput
+    ) {
+        return ResponseEntity.ok(iHoaDonService.getCountHoaDonByTrangThai(trangThai, startDate, endDate, dayInput));
     }
 }

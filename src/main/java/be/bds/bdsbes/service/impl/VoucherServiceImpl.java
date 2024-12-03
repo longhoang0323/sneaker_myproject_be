@@ -109,7 +109,7 @@ public class VoucherServiceImpl implements IVoucherService{
         }
 
         // Retrieve all entities
-        Pageable pageable = PageRequest.of((page - 1), size, Sort.Direction.ASC, "id");
+        Pageable pageable = PageRequest.of((page - 1), size, Sort.Direction.DESC, "id");
         Page<Voucher> entities = voucherRepository.findAll(pageable);
 
         List<VoucherResponse> dtos = this.voucherMapper.toDtoList(entities.getContent());
