@@ -20,7 +20,9 @@ import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 import java.util.Optional;
 
@@ -51,9 +53,55 @@ public class HoaDonServiceImpl implements IHoaDonService {
     }
 
     @Override
+    public PagedResponse<HoaDonResponse> getAllByUser(int page, int size, Long idUser) {
+        Pageable pageable = PageRequest.of((page - 1), size, Sort.Direction.DESC, "id");
+        Page<HoaDonResponse> entities = hoaDonRepository.getAllByUser(pageable, idUser);
+        List<HoaDonResponse> dtos = entities.toList();
+        return new PagedResponse<>(
+                dtos,
+                page,
+                size,
+                entities.getTotalElements(),
+                entities.getTotalPages(),
+                entities.isLast(),
+                entities.getSort().toString()
+        );
+    }
+
+    @Override
     public PagedResponse<HoaDonResponse> getAllByLoaiHoaDon(int page, int size, Integer loaiHoaDon) {
         Pageable pageable = PageRequest.of((page - 1), size, Sort.Direction.DESC, "id");
         Page<HoaDonResponse> entities = hoaDonRepository.getAllByLoaiHD(pageable, loaiHoaDon);
+        List<HoaDonResponse> dtos = entities.toList();
+        return new PagedResponse<>(
+                dtos,
+                page,
+                size,
+                entities.getTotalElements(),
+                entities.getTotalPages(),
+                entities.isLast(),
+                entities.getSort().toString()
+        );
+    }
+
+    @Override
+    public PagedResponse<HoaDonResponse> getAllBySearchAndAll(int page, int size, Integer loaiHoaDon, String searchInput, String startDate, String endDate, Integer trangThaiGiaoHang, Integer hinhThucGiaoHang, Integer trangThai) {
+        Pageable pageable = PageRequest.of((page - 1), size, Sort.Direction.DESC, "id");
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+        if(startDate.isEmpty() || endDate.isEmpty()){
+            Page<HoaDonResponse> entities = hoaDonRepository.getAllBySearchAndAllTrangThai(pageable, loaiHoaDon, searchInput, trangThaiGiaoHang, hinhThucGiaoHang, trangThai);
+            List<HoaDonResponse> dtos = entities.toList();
+            return new PagedResponse<>(
+                    dtos,
+                    page,
+                    size,
+                    entities.getTotalElements(),
+                    entities.getTotalPages(),
+                    entities.isLast(),
+                    entities.getSort().toString()
+            );
+        }
+        Page<HoaDonResponse> entities = hoaDonRepository.getAllBySearchAndAll(pageable, loaiHoaDon, searchInput, LocalDate.parse(startDate, formatter), LocalDate.parse(endDate, formatter), trangThaiGiaoHang, hinhThucGiaoHang, trangThai);
         List<HoaDonResponse> dtos = entities.toList();
         return new PagedResponse<>(
                 dtos,
@@ -177,5 +225,29 @@ public class HoaDonServiceImpl implements IHoaDonService {
             return 1;
         }
         return 0;
+    }
+
+    @Override
+    public Double getSumTongThanhToan(String startDate, String endDate, String dayInput) {
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+        if((startDate.isEmpty() || endDate.isEmpty()) && !dayInput.isEmpty()){
+            return hoaDonRepository.getSumTongThanhToan(null, null, LocalDate.parse(dayInput, formatter));
+        }
+        if((!startDate.isEmpty() && !endDate.isEmpty()) && dayInput.isEmpty()){
+            return hoaDonRepository.getSumTongThanhToan(LocalDate.parse(startDate, formatter), LocalDate.parse(endDate, formatter), null);
+        }
+        return  hoaDonRepository.getSumTongThanhToan(LocalDate.parse(startDate, formatter), LocalDate.parse(endDate, formatter), LocalDate.parse(dayInput, formatter));
+    }
+
+    @Override
+    public Double getCountHoaDonByTrangThai(Integer trangThai, String startDate, String endDate, String dayInput) {
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+        if((startDate.isEmpty() || endDate.isEmpty()) && !dayInput.isEmpty()){
+            return hoaDonRepository.getCountHoaDonByTrangThai(trangThai,null, null, LocalDate.parse(dayInput, formatter));
+        }
+        if((!startDate.isEmpty() && !endDate.isEmpty()) && dayInput.isEmpty()){
+            return hoaDonRepository.getCountHoaDonByTrangThai(trangThai, LocalDate.parse(startDate, formatter), LocalDate.parse(endDate, formatter), null);
+        }
+        return  hoaDonRepository.getCountHoaDonByTrangThai(trangThai, LocalDate.parse(startDate, formatter), LocalDate.parse(endDate, formatter), LocalDate.parse(dayInput, formatter));
     }
 }

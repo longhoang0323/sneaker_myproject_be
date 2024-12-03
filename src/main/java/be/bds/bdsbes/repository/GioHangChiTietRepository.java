@@ -14,14 +14,14 @@ import java.util.List;
 public interface GioHangChiTietRepository extends JpaRepository<GioHangChiTiet, Long> {
 
     @Query("select new be.bds.bdsbes.payload.GioHangChiTietResponse(gh.id, gh.chiTietSanPham.id, gh.chiTietSanPham.sanPham.ten, gh.chiTietSanPham.mauSac.ten, gh.chiTietSanPham.kichThuoc.ten, " +
-            "gh.chiTietSanPham.image, gh.user.id, gh.user.name, gh.donGia, gh.giaBan, gh.soLuong, gh.giamGia, gh.trangThai) from GioHangChiTiet gh where gh.user.id = :id")
+            "gh.chiTietSanPham.image, gh.user.id, gh.user.name, gh.donGia, gh.giaBan, gh.soLuong, gh.giamGia, gh.trangThai, 0) from GioHangChiTiet gh where gh.user.id = :id")
     Page<GioHangChiTietResponse> getAllByUser(Pageable pageable, Long id);
 
     @Query("select gh from GioHangChiTiet gh where gh.user.id = :idUser")
     List<GioHangChiTiet> getAllListByUser(Long idUser);
 
     @Query("select new be.bds.bdsbes.payload.GioHangChiTietResponse(gh.id, gh.chiTietSanPham.id, gh.chiTietSanPham.sanPham.ten, gh.chiTietSanPham.mauSac.ten, gh.chiTietSanPham.kichThuoc.ten, " +
-            "gh.chiTietSanPham.image, gh.user.id, gh.user.name, gh.donGia, gh.giaBan, gh.soLuong, gh.giamGia, gh.trangThai) from GioHangChiTiet gh where gh.id = :id")
+            "gh.chiTietSanPham.image, gh.user.id, gh.user.name, gh.donGia, gh.giaBan, gh.soLuong, gh.giamGia, gh.trangThai, 0) from GioHangChiTiet gh where gh.id = :id")
     GioHangChiTietResponse getOneById(Long id);
 
 }
