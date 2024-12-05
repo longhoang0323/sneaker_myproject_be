@@ -228,25 +228,31 @@ public class HoaDonServiceImpl implements IHoaDonService {
     }
 
     @Override
-    public Double getSumTongThanhToan(String startDate, String endDate, String dayInput) {
+    public BigDecimal getSumTongThanhToan(Integer loaiHoaDon, String startDate, String endDate, String dayInput) {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
         if((startDate.isEmpty() || endDate.isEmpty()) && !dayInput.isEmpty()){
-            return hoaDonRepository.getSumTongThanhToan(null, null, LocalDate.parse(dayInput, formatter));
+            return hoaDonRepository.getSumTongThanhToan(loaiHoaDon,null, null, LocalDate.parse(dayInput, formatter));
         }
         if((!startDate.isEmpty() && !endDate.isEmpty()) && dayInput.isEmpty()){
-            return hoaDonRepository.getSumTongThanhToan(LocalDate.parse(startDate, formatter), LocalDate.parse(endDate, formatter), null);
+            return hoaDonRepository.getSumTongThanhToan(loaiHoaDon, LocalDate.parse(startDate, formatter), LocalDate.parse(endDate, formatter), null);
         }
-        return  hoaDonRepository.getSumTongThanhToan(LocalDate.parse(startDate, formatter), LocalDate.parse(endDate, formatter), LocalDate.parse(dayInput, formatter));
+        if(startDate.isEmpty() || endDate.isEmpty()){
+            return hoaDonRepository.getSumTongThanhToan(loaiHoaDon, null, null, null);
+        }
+        return  hoaDonRepository.getSumTongThanhToan(loaiHoaDon, LocalDate.parse(startDate, formatter), LocalDate.parse(endDate, formatter), LocalDate.parse(dayInput, formatter));
     }
 
     @Override
-    public Double getCountHoaDonByTrangThai(Integer trangThai, String startDate, String endDate, String dayInput) {
+    public int getCountHoaDonByTrangThai(Integer trangThai, String startDate, String endDate, String dayInput) {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
         if((startDate.isEmpty() || endDate.isEmpty()) && !dayInput.isEmpty()){
             return hoaDonRepository.getCountHoaDonByTrangThai(trangThai,null, null, LocalDate.parse(dayInput, formatter));
         }
         if((!startDate.isEmpty() && !endDate.isEmpty()) && dayInput.isEmpty()){
             return hoaDonRepository.getCountHoaDonByTrangThai(trangThai, LocalDate.parse(startDate, formatter), LocalDate.parse(endDate, formatter), null);
+        }
+        if(startDate.isEmpty() || endDate.isEmpty()){
+            return hoaDonRepository.getCountHoaDonByTrangThai(trangThai, null, null, null);
         }
         return  hoaDonRepository.getCountHoaDonByTrangThai(trangThai, LocalDate.parse(startDate, formatter), LocalDate.parse(endDate, formatter), LocalDate.parse(dayInput, formatter));
     }

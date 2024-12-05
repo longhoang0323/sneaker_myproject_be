@@ -5,6 +5,7 @@ import be.bds.bdsbes.payload.HoaDonResponse;
 import be.bds.bdsbes.service.dto.HoaDonDTO;
 import be.bds.bdsbes.utils.dto.PagedResponse;
 
+import java.math.BigDecimal;
 import java.time.LocalDate;
 
 public interface IHoaDonService {
@@ -32,7 +33,7 @@ public interface IHoaDonService {
 
     Integer updateTrangThaiGiaoHang(Long id, HoaDonDTO hoaDonDTO);
 
-    Double getSumTongThanhToan(String startDate, String endDate, String dayInput);
+    BigDecimal getSumTongThanhToan(Integer loaiHoaDon, String startDate, String endDate, String dayInput);
 
-    Double getCountHoaDonByTrangThai(Integer trangThai, String startDate, String endDate, String dayInput);
+    int getCountHoaDonByTrangThai(Integer trangThai, String startDate, String endDate, String dayInput);
 }

@@ -114,11 +114,12 @@ public class HoaDonController {
 
     @GetMapping("get-sum-by-day")
     public ResponseEntity<?> getSumTongThanhToan(
+            @RequestParam(value = "loaiHoaDon") Integer loaiHoaDon,
             @RequestParam(value = "startDate") String startDate,
             @RequestParam(value = "endDate") String endDate,
             @RequestParam(value = "dayInput") String dayInput
     ) {
-        return ResponseEntity.ok(iHoaDonService.getSumTongThanhToan(startDate, endDate, dayInput));
+        return ResponseUtil.wrap(iHoaDonService.getSumTongThanhToan(loaiHoaDon, startDate, endDate, dayInput));
     }
 
     @GetMapping("get-count-hoa-don")
@@ -128,6 +129,6 @@ public class HoaDonController {
             @RequestParam(value = "endDate") String endDate,
             @RequestParam(value = "dayInput") String dayInput
     ) {
-        return ResponseEntity.ok(iHoaDonService.getCountHoaDonByTrangThai(trangThai, startDate, endDate, dayInput));
+        return ResponseUtil.wrap(iHoaDonService.getCountHoaDonByTrangThai(trangThai, startDate, endDate, dayInput));
     }
 }
