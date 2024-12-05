@@ -8,6 +8,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
+import java.math.BigDecimal;
 import java.time.LocalDate;
 
 @Repository("hoaDonRepository")
@@ -93,13 +94,13 @@ public interface HoaDonRepository extends JpaRepository<HoaDon, Long> {
             "left join User u on h.user.id = u.id left join Voucher v on h.voucher.id = v.id where h.user.id = :idUser")
     Page<HoaDonResponse> getAllByUser(Pageable pageable, Long idUser);
 
-    @Query("select sum(h.tongThanhToan) from HoaDon h where h.trangThai = 1 " +
+    @Query("select sum(h.tongThanhToan) from HoaDon h where h.trangThai = 1 and (h.loaiHoaDon = :loaiHoaDon or :loaiHoaDon = 10) " +
             "and ((cast(h.ngayThanhToan as date) >= cast(:startDate as date) and cast(h.ngayThanhToan as date) <= cast(:endDate as date)) or :startDate = null or :endDate = null) " +
             "and (cast(h.ngayThanhToan as date ) = cast(:dayInput as date) or :dayInput = null)")
-    Double getSumTongThanhToan(LocalDate startDate, LocalDate endDate, LocalDate dayInput);
+    BigDecimal getSumTongThanhToan(Integer loaiHoaDon, LocalDate startDate, LocalDate endDate, LocalDate dayInput);
 
-    @Query("select count (h.id) from HoaDon h where h.trangThai = :trangThai " +
+    @Query("select count (h.id) from HoaDon h where (h.trangThai = :trangThai or :trangThai = 10) " +
             "and ((cast(h.ngayThanhToan as date) >= cast(:startDate as date) and cast(h.ngayThanhToan as date) <= cast(:endDate as date)) or :startDate = null or :endDate = null) " +
             "and (cast(h.ngayThanhToan as date ) = cast(:dayInput as date) or :dayInput = null)")
-    Double getCountHoaDonByTrangThai(Integer trangThai, LocalDate startDate, LocalDate endDate, LocalDate dayInput);
+    int getCountHoaDonByTrangThai(Integer trangThai, LocalDate startDate, LocalDate endDate, LocalDate dayInput);
 }
