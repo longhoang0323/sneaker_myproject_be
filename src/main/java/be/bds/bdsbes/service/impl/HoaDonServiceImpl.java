@@ -4,6 +4,7 @@ import be.bds.bdsbes.domain.User;
 import be.bds.bdsbes.entities.HoaDon;
 import be.bds.bdsbes.entities.KhachHang;
 import be.bds.bdsbes.entities.Voucher;
+import be.bds.bdsbes.payload.DoanhThuResponse;
 import be.bds.bdsbes.payload.HangResponse;
 import be.bds.bdsbes.payload.HoaDonResponse;
 import be.bds.bdsbes.repository.HoaDonRepository;
@@ -255,5 +256,10 @@ public class HoaDonServiceImpl implements IHoaDonService {
             return hoaDonRepository.getCountHoaDonByTrangThai(trangThai, null, null, null);
         }
         return  hoaDonRepository.getCountHoaDonByTrangThai(trangThai, LocalDate.parse(startDate, formatter), LocalDate.parse(endDate, formatter), LocalDate.parse(dayInput, formatter));
+    }
+
+    @Override
+    public List<DoanhThuResponse> getDoanhThuByMonth(int year) {
+        return hoaDonRepository.getDoanhThuByMonth(year);
     }
 }

@@ -6,6 +6,7 @@ import be.bds.bdsbes.utils.AppConstantsUtil;
 import be.bds.bdsbes.utils.ResponseUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.jpa.repository.Query;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
@@ -130,5 +131,12 @@ public class HoaDonController {
             @RequestParam(value = "dayInput") String dayInput
     ) {
         return ResponseUtil.wrap(iHoaDonService.getCountHoaDonByTrangThai(trangThai, startDate, endDate, dayInput));
+    }
+
+    @GetMapping("get-doanh-thu-by-month")
+    public ResponseEntity<?> getCountHoaDon(
+            @RequestParam(value = "year") int year
+    ) {
+        return ResponseUtil.wrap(iHoaDonService.getDoanhThuByMonth(year));
     }
 }
