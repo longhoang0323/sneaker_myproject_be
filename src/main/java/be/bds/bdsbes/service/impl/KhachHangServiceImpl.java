@@ -73,8 +73,10 @@ public class KhachHangServiceImpl implements IKhachHangService {
         KhachHang khachHang = khachHangDTO.dto(new KhachHang());
         khachHang.setMa("KH" + ma);
         khachHang.setHoTen(khachHangDTO.getHoTen());
+        khachHang.setNgaySinh(khachHangDTO.getNgaySinh());
         khachHang.setSdt(khachHangDTO.getSdt());
         khachHang.setDiaChi(khachHangDTO.getDiaChi());
+        khachHang.setTrangThai(1);
         return khachHangRepository.save(khachHang);
     }
 

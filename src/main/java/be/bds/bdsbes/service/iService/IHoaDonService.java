@@ -1,12 +1,14 @@
 package be.bds.bdsbes.service.iService;
 
 import be.bds.bdsbes.entities.HoaDon;
+import be.bds.bdsbes.payload.DoanhThuResponse;
 import be.bds.bdsbes.payload.HoaDonResponse;
 import be.bds.bdsbes.service.dto.HoaDonDTO;
 import be.bds.bdsbes.utils.dto.PagedResponse;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
+import java.util.List;
 
 public interface IHoaDonService {
 
@@ -36,4 +38,6 @@ public interface IHoaDonService {
     BigDecimal getSumTongThanhToan(Integer loaiHoaDon, String startDate, String endDate, String dayInput);
 
     int getCountHoaDonByTrangThai(Integer trangThai, String startDate, String endDate, String dayInput);
+
+    List<DoanhThuResponse> getDoanhThuByMonth(int year);
 }

@@ -1,6 +1,7 @@
 package be.bds.bdsbes.repository;
 
 import be.bds.bdsbes.entities.HoaDon;
+import be.bds.bdsbes.payload.DoanhThuResponse;
 import be.bds.bdsbes.payload.HoaDonResponse;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -10,6 +11,7 @@ import org.springframework.stereotype.Repository;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
+import java.util.List;
 
 @Repository("hoaDonRepository")
 public interface HoaDonRepository extends JpaRepository<HoaDon, Long> {
@@ -103,4 +105,8 @@ public interface HoaDonRepository extends JpaRepository<HoaDon, Long> {
             "and ((cast(h.ngayThanhToan as date) >= cast(:startDate as date) and cast(h.ngayThanhToan as date) <= cast(:endDate as date)) or :startDate = null or :endDate = null) " +
             "and (cast(h.ngayThanhToan as date ) = cast(:dayInput as date) or :dayInput = null)")
     int getCountHoaDonByTrangThai(Integer trangThai, LocalDate startDate, LocalDate endDate, LocalDate dayInput);
+
+    @Query("select new be.bds.bdsbes.payload.DoanhThuResponse(month(h.ngayThanhToan), year(h.ngayThanhToan), sum(h.tongThanhToan)) from HoaDon h " +
+            "where h.trangThai = 1 and year(h.ngayThanhToan) = :year group by month(h.ngayThanhToan), year(h.ngayThanhToan)")
+    List<DoanhThuResponse> getDoanhThuByMonth(int year);
 }

@@ -47,6 +47,11 @@ public class KhachHangController {
         return ResponseEntity.ok(khachHangService.getKhachBanLe(trangThai));
     }
 
+    @PostMapping("create")
+    public ResponseEntity<?> create(@RequestBody @Valid KhachHangDTO khachHangDTO, BindingResult result){
+        return ResponseEntity.ok(khachHangService.create(khachHangDTO));
+    }
+
 
 
     @PutMapping("update")
