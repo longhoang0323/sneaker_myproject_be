@@ -23,8 +23,8 @@ public interface KhachHangRepository extends JpaRepository<KhachHang, Long> {
     @Query("select new be.bds.bdsbes.payload.KhachHangResponse1(k.id, k.ma, k.hoTen, k.ngaySinh, k.gioiTinh, k.diaChi, k.sdt, k.tichDiem, k.thoiHan, k.trangThai) from KhachHang k join User u on k.id = u.khachHang.id where u.id = :id")
     KhachHangResponse1 getKhachHangByUser(Long id);
 
-    @Query("select new be.bds.bdsbes.payload.KhachHangResponse1(k.id, k.ma, k.hoTen, k.ngaySinh, k.gioiTinh, k.diaChi, k.sdt, k.tichDiem, k.thoiHan, k.trangThai) from KhachHang k where k.trangThai = 1 and k.ma like concat('%', :searchInput, '%')" +
-            " or k.hoTen like concat('%', :searchInput, '%') or k.sdt like concat('%', :searchInput, '%')")
+    @Query("select new be.bds.bdsbes.payload.KhachHangResponse1(k.id, k.ma, k.hoTen, k.ngaySinh, k.gioiTinh, k.diaChi, k.sdt, k.tichDiem, k.thoiHan, k.trangThai) from KhachHang k where k.trangThai = 1 and (k.ma like concat('%', :searchInput, '%')" +
+            " or k.hoTen like concat('%', :searchInput, '%') or k.sdt like concat('%', :searchInput, '%'))")
     Page<KhachHangResponse1> getListBySearch(Pageable pageable, String searchInput);
 
     @Query("select new be.bds.bdsbes.payload.KhachHangResponse1(k.id, k.ma, k.hoTen, k.ngaySinh, k.gioiTinh, k.diaChi, k.sdt, k.tichDiem, k.thoiHan, k.trangThai) from KhachHang k where k.trangThai = 1")
