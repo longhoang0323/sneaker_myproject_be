@@ -176,13 +176,14 @@ public class HoaDonServiceImpl implements IHoaDonService {
         hoaDon.setTenNguoiShip(hoaDonDTO.getTenNguoiShip());
         hoaDon.setSdtNguoiShip(hoaDonDTO.getSdtNguoiShip());
         hoaDon.setTienGiamGia(hoaDonDTO.getTienGiamGia());
-        hoaDon.setTienShip(hoaDon.getTienShip());
+        hoaDon.setTienShip(hoaDonDTO.getTienShip());
         hoaDon.setTongThanhToan(hoaDonDTO.getTongThanhToan());
         hoaDon.setTienMat(hoaDonDTO.getTienMat());
         hoaDon.setChuyenKhoan(hoaDonDTO.getChuyenKhoan());
         hoaDon.setDiaChi(hoaDonDTO.getDiaChi());
         hoaDon.setKhachHang(khachHang);
         hoaDon.setTrangThai(hoaDonDTO.getTrangThai());
+        hoaDon.setTrangThaiGiaoHang(hoaDonDTO.getTrangThaiGiaoHang());
         hoaDon.setGhiChu("");
         this.hoaDonRepository.save(hoaDon);
         return hoaDonRepository.getOneById(id);

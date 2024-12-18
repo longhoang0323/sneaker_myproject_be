@@ -4,6 +4,7 @@ import be.bds.bdsbes.entities.ChiTietSanPham;
 import be.bds.bdsbes.entities.HoaDon;
 import be.bds.bdsbes.entities.HoaDonChiTiet;
 import be.bds.bdsbes.payload.HoaDonChiTietResponse;
+import be.bds.bdsbes.payload.SanPhamBanChayResponse;
 import be.bds.bdsbes.repository.HoaDonChiTietRepository;
 import be.bds.bdsbes.repository.HoaDonRepository;
 import be.bds.bdsbes.service.dto.HoaDonChiTietDTO;
@@ -101,5 +102,15 @@ public class HoaDonChiTietServiceImpl implements IHoaDonChiTietService {
     @Override
     public HoaDonChiTietResponse get(Long id) {
         return null;
+    }
+
+    @Override
+    public List<SanPhamBanChayResponse> getTop3SpBanChay() {
+        return hoaDonChiTietRepository.getTop3SpBanChay();
+    }
+
+    @Override
+    public long getTongSpBanChay() {
+        return hoaDonChiTietRepository.getTongSPBanChay();
     }
 }

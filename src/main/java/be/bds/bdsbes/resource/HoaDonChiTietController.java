@@ -51,4 +51,19 @@ public class HoaDonChiTietController {
             @RequestBody @Valid HoaDonChiTietDTO hoaDonChiTietDTO, BindingResult bindingResult) {
         return ResponseEntity.ok(iHoaDonChiTietService.create(hoaDonChiTietDTO));
     }
+
+    @GetMapping("top-sp-ban-chay")
+    public ResponseEntity<?> getListTopSPBanChay() {
+        try {
+            return ResponseUtil.wrap(iHoaDonChiTietService.getTop3SpBanChay());
+        } catch (Exception ex) {
+            log.error(this.getClass().getName(), ex);
+            return ResponseUtil.generateErrorResponse(ex);
+        }
+    }
+
+    @GetMapping("tong-sp-ban-chay")
+    public ResponseEntity<?> getTongSPBanChay() {
+            return ResponseEntity.ok(iHoaDonChiTietService.getTongSpBanChay());
+    }
 }
